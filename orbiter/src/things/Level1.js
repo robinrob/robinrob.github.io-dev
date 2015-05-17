@@ -3,11 +3,11 @@ var Level1 = Level.extend({
         this.end = rss.toRad(-1.0 * rss.landingPad.angle / 2)
         this.addStartFinishPad(0, rss.landingPad.angle)
 
-        this.addObstacleWithStar(2, 5, 30)
+        this.addObstacleWithStar(2, 2, 30)
         this.addObstacleWithStar(2, 2, 40)
         this.addObstacleWithStar(2, 2, 50)
-        this.addObstacleWithStar(2, 3, 60)
-        this.addObstacleWithStar(2, 3, 70)
+        this.addObstacleWithStar(2, 2, 60)
+        this.addObstacleWithStar(2, 2, 70)
 
         this.addFuelStrip(2, 10, 20)
 

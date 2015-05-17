@@ -17,7 +17,7 @@ var CompositeSprite = cc.Sprite.extend({
     setChildren: function(resources) {
         this.removeAllChildren()
         resources.forEach(function(res, index){
-            var child = new cc.Sprite(res)
+            var child = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame(res))
             child.setPosition(cc.p(this.width / 2, this.height / 2))
             // Add children at successively higher z-values in order to stack them on top of each other.
             this.addChild(child, index)

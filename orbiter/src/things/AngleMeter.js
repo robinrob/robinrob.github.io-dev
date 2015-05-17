@@ -21,11 +21,6 @@ var AngleMeter = cc.Node.extend({
     draw: function(level) {
         this.r.draw.clear()
 
-        //this.r.draw.drawDot(
-        //    cc.p(0, 0),
-        //    this.r.radius,
-        //    rss.setAlpha(rss.colors.red, 128)
-        //)
         this.r.draw.drawCircle(
             cc.p(0, 0),
             this.r.radius,
@@ -35,14 +30,12 @@ var AngleMeter = cc.Node.extend({
             2,
             rss.colors.red
         )
-        if (level * rss.twoPI > rss.toRad(1)) {
-            this.r.draw.drawPoly(
-                rss.circSegmentVerts(this.r.radius, level * rss.twoPI, rss.toRad(90), 50),
-                rss.setAlpha(rss.colors.red, 170),
-                2,
-                rss.colors.red
-            )
-        }
+        this.r.draw.drawPoly(
+            rss.circSegmentVerts(this.r.radius, level * rss.twoPI, rss.toRad(90), 50, -1.0),
+            rss.setAlpha(rss.colors.red, 170),
+            2,
+            rss.colors.red
+        )
     },
 
     setLevel: function(level) {

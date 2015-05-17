@@ -39,6 +39,8 @@ cp.Vect.prototype.subY = function(dy) {
     return cp.v(this.x, this.y - dy)
 }
 
+rss
+
 rss.logO = function(obj) {
     for (i in obj) {
         cc.log(i)
@@ -224,6 +226,14 @@ rss.polarToCartesian = function(r, theta) {
     return cc.p(rss.polarXProj(r, theta), rss.polarYProj(r, theta))
 }
 
+// Haven't tested
+rss.cartesianToPolar = function(x, y) {
+    var theta = Math.atan(y / x)
+    var radius = Math.sqrt(x * x + y * y)
+
+    return cc.p(radius, theta)
+}
+
 rss.pinJoint = function(obj1, obj2) {
     return [new cp.PinJoint(obj1.getBody(), obj2.getBody(), rss.toV(obj1.getJointP()), rss.toV(obj2.getJointP()))]
 }
@@ -347,21 +357,35 @@ rss.setAlpha = function(col, alpha) {
     return cc.color(col.r, col.g, col.b, alpha)
 }
 
-rss.circSegmentVerts = function(radius, angle, offset, segments) {
+rss.circSegmentVerts = function(radius, angle, offset, segments, direction) {
+    return rss.floatingCircSegmentVerts(radius, angle, offset, segments, 1.0, direction)
+}
+
+rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightFactor, direction) {
+    var verts = []
+
+    var direction = direction || 1.0
+
+    verts.push(rss.polarToCartesian(radius * (1 - heightFactor), offset + direction * angle))
+
+    var deltaTheta = angle / segments
+    for (var n = 0; n <= segments; ++n) {
+        verts.push(rss.polarToCartesian(radius, offset + direction * (angle - n * deltaTheta)))
+    }
+
+    verts.push(rss.polarToCartesian(radius * (1 - heightFactor), offset))
+
+    return verts
+}
+
+rss.starVerts = function(nRays, r1, r2, rayWidth) {
     verts = []
 
-    verts.push(cc.p(0, 0))
-
-    verts.push(cc.p(radius * Math.cos(offset), radius * Math.sin(offset)))
-    var deltaTheta = angle / segments
-    for (var a = deltaTheta; a < angle; a += deltaTheta) {
-        p = cc.p(
-            radius * Math.cos(offset - a),
-            radius * Math.sin(offset - a)
-        )
-        verts.push(p)
+    var theta = rss.twoPI / nRays
+    for (var n = 0; n < nRays; ++n) {
+        verts.push(rss.polarToCartesian(r1, n * theta))
+        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta))
     }
-    verts.push(cc.p(radius * Math.cos(offset - angle), radius * Math.sin(offset - angle)))
 
     return verts
 }
@@ -372,6 +396,15 @@ rss.scaleVerts = function(verts, scale) {
         newVerts.push(cc.p(vert.x * scale, vert.y * scale))
     })
     return newVerts
+}
+
+rss.toXYVerts = function(verts) {
+    vertsXY = []
+    verts.forEach(function(vert) {
+        vertsXY.push(vert.x)
+        vertsXY.push(vert.y)
+    })
+    return vertsXY
 }
 
 rss.log = function(str) {

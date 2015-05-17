@@ -27,25 +27,8 @@ rss.colors = {
 }
 
 rss.res = {
-    spaceship0_png: "res/spaceship/0.png", // 60x33
-    spaceship0_2png: "res/spaceship/0_2.png", // 120x66
-    spaceship_png : "res/spaceship/spaceship.png", // 120x66
-    spaceship_plist : "res/spaceship/spaceship.plist",
-
-    //star0_png: "res/star/0.png",
-    //star_png : "res/star/star.png",
-    //star_plist : "res/star/star.plist",
-
-    button_outer_png: "res/buttons/button-outer.png",
-
-    button_n_inner_png: "res/buttons/button_n-inner.png",
-    button_s_inner_png: "res/buttons/button_s-inner.png",
-
-    start_n_text_png: "res/buttons/start_n-text.png",
-    start_s_text_png: "res/buttons/start_s-text.png",
-
-    restart_n_text_png: "res/buttons/restart_n-text.png",
-    restart_s_text_png: "res/buttons/restart_s-text.png"
+    spritesheet_plist: "res/spritesheet.plist",
+    spritesheet_png: "res/spritesheet.png"
 }
 
 // Resources for pre-loading

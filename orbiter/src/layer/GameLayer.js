@@ -51,6 +51,8 @@ var GameLayer = rss.BaseLayer.extend({
     init: function () {
         this._super()
 
+        cc.spriteFrameCache.addSpriteFrames(rss.res.spritesheet_plist);
+
         this.initActors()
 
         rss.game.state = rss.game.states.ready

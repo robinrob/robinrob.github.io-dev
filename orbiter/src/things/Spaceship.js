@@ -4,17 +4,13 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
 
     ctor:function(args) {
         cc.log("Spaceship.ctor ...")
-        args.spriteCfg = {
-            image: rss.res.spaceship0_png
-        }
-        //args.spriteCfg = {
-        //    image: rss.res.spaceship_png,
-        //    pList: rss.res.spaceship_plist,
-        //    name: ""
-        //}
+        args.spriteFrame = "#spaceship_nofire.png"
+        args.scale = 0.5
         args.mass = rss.spaceship.mass
-
         this._super(args)
+
+        this.r.upFrame = cc.spriteFrameCache.getSpriteFrame("spaceship0.png")
+        this.r.downFrame = cc.spriteFrameCache.getSpriteFrame("spaceship_nofire.png")
     },
 
     init:function() {
@@ -74,6 +70,10 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
         return this.r.fuel
     },
 
+    setSprite: function(res) {
+        this.r.sprite = res
+    },
+
     update: function(dt) {
         var p = this.getPos()
         var winSize = cc.director.getWinSize()
@@ -86,10 +86,12 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
                 rss.spaceship.acc += 100
                 this.applyImpulse(cp.v(0, Math.min(this.getMass() * rss.spaceship.acc * dt, rss.spaceship.maxImp)))
                 this.decFuel()
+                this.r.sprite.setSpriteFrame(this.r.upFrame)
             }
         }
         else {
             rss.spaceship.acc = 1000
+            this.r.sprite.setSpriteFrame(this.r.downFrame)
         }
 
         this.setAngle(0)

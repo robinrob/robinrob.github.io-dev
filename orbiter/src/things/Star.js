@@ -1,15 +1,5 @@
 var Star = rss.CircBody.extend({
     ctor: function(args) {
-        cc.log("Spaceship.ctor ...")
-        //args.spriteCfg = {
-        //    image: rss.res.coin0_png
-        //}
-        //args.spriteCfg = {
-        //    image: rss.res.spaceship_png,
-        //    pList: rss.res.spaceship_plist,
-        //    name: ""
-        //}
-        //args.size = cc.size(rss.star.width, rss.star.height)
         args.radius = rss.star.width / 2
         args.mass = rss.star.mass
         args.size = cc.size(rss.star.width, rss.star.width)
@@ -37,33 +27,18 @@ var Star = rss.CircBody.extend({
     },
 
     draw: function() {
-        this.drawCircle()
-        this.drawDot()
-    },
-
-    drawCircle: function() {
-        this.r.draw.drawCircle(
-            this.getPos(),
-            this.getRadius(),
-            0,
-            this.getRadius() * 2,
-            false,
+        this.r.draw.clear()
+        this.r.draw.setPosition(this.getPos())
+        this.r.draw.drawPoly(
+            rss.starVerts(5, this.r.radius, this.r.radius * 0.5, this.r.radius * 0.2),
+            rss.setAlpha(this.getColor(), 128),
             rss.ui.linewidth,
             rss.setAlpha(this.getColor(), 255)
         )
     },
 
-    drawDot: function() {
-        this.r.draw.drawDot(
-            this.getPos(),
-            this.getRadius(),
-            rss.setAlpha(this.getColor(), 128)
-        )
-    },
-
     update: function() {
         if (this.r.shouldDraw) {
-            this.r.draw.clear()
             this.draw()
         }
     }

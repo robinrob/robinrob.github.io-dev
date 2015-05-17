@@ -39,29 +39,10 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
         this.r.body.setPos(this.getStartPos())
 
         // shape
-        this.r.vertsXY = []
-        this.r.verts = []
-
-        var p = rss.polarToCartesian(this.r.radius * (1 - this.getHeight()), this.r.right)
-        this.r.vertsXY.push(p.x, p.y)
-        this.r.verts.push(p)
-
-        var gap = this.getWidth() / this.r.segments
-        for (var a = this.getWidth(); a >= 0; a -= gap) {
-            p = cc.p(
-                this.r.radius * Math.cos(a + this.r.offset),
-                this.r.radius * Math.sin(a + this.r.offset)
-            )
-            this.r.vertsXY.push(p.x, p.y)
-            this.r.verts.push(p)
-        }
-
-        p = rss.polarToCartesian(this.r.radius * (1 - this.getHeight()), this.r.left)
-
-        this.r.vertsXY.push(p.x, p.y)
-        this.r.verts.push(p)
-
+        this.r.verts = rss.floatingCircSegmentVerts(this.r.radius, this.getWidth(), this.r.offset, this.r.segments, this.r.size.height)
         this.r.verts = rss.scaleVerts(this.r.verts, this.SCALE)
+
+        this.r.vertsXY = rss.toXYVerts(this.r.verts)
 
         this.r.shape = new cp.PolyShape(this.r.body, this.r.vertsXY, cp.v(0, 0))
 
