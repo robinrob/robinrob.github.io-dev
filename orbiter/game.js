@@ -1,63 +1,3 @@
-/**
- * A brief explanation for "project.json":
- * Here is the content of project.json file, this is the global configuration for your game, you can modify it to customize some behavior.
- * The detail of each field is under it.
- {
-    "project_type": "javascript",
-    // "project_type" indicate the program language of your project, you can ignore this field
-
-    "debugMode"     : 1,
-    // "debugMode" possible values :
-    //      0 - No message will be printed.
-    //      1 - cc.error, cc.assert, cc.warn, cc.log will print in console.
-    //      2 - cc.error, cc.assert, cc.warn will print in console.
-    //      3 - cc.error, cc.assert will print in console.
-    //      4 - cc.error, cc.assert, cc.warn, cc.log will print on canvas, available only on web.
-    //      5 - cc.error, cc.assert, cc.warn will print on canvas, available only on web.
-    //      6 - cc.error, cc.assert will print on canvas, available only on web.
-
-    "showFPS"       : true,
-    // Left bottom corner fps information will show when "showFPS" equals true, otherwise it will be hide.
-
-    "frameRate"     : 60,
-    // "frameRate" set the wanted frame rate for your game, but the real fps depends on your game implementation and the running environment.
-
-    "id"            : "gameCanvas",
-    // "gameCanvas" sets the id of your canvas element on the web page, it's useful only on web.
-
-    "renderMode"    : 0,
-    // "renderMode" sets the renderer type, only useful on web :
-    //      0 - Automatically chosen by engine
-    //      1 - Forced to use canvas renderer
-    //      2 - Forced to use WebGL renderer, but this will be ignored on mobile browsers
-
-    "engineDir"     : "frameworks/cocos2d-html5/",
-    // In debug mode, if you use the whole engine to develop your game, you should specify its relative path with "engineDir",
-    // but if you are using a single engine file, you can ignore it.
-
-    "modules"       : ["cocos2d"],
-    // "modules" defines which modules you will need in your game, it's useful only on web,
-    // using this can greatly reduce your game's resource size, and the cocos console tool can package your game with only the modules you set.
-    // For details about modules definitions, you can refer to "../../frameworks/cocos2d-html5/modulesConfig.json".
-
-    "jsList"        : [
-    ]
-    // "jsList" sets the list of js files in your game.
- }
- *
- */
-
-cc.game.onStart = function(){
-    cc.view.adjustViewPort(true);
-    cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
-    cc.view.resizeWithBrowserSize(true);
-    //load resources
-    cc.LoaderScene.preload(rss.resources, function () {
-        //cc.director.runScene(new MenuScene());
-        cc.director.runScene(new GameScene());
-    }, this);
-};
-cc.game.run();
 var rss = rss || {};
 
 rss.chipmunk = "chipmunk"
@@ -91,111 +31,6 @@ rss.tag = {
     gameLayer: 99,
     statsLayer: 98
 }
-var rss = rss || {};
-
-//rss.physics = rss.box2D
-rss.physics = rss.chipmunk
-
-rss.g = 100
-rss.gravity = -500
-
-
-rss.keys = []
-
-rss.res = {
-    spritesheet_plist: "res/spritesheet.plist",
-    spritesheet_png: "res/spritesheet.png",
-
-    star_wav: "res/star.wav",
-    spaceship_ogg: "res/delta_iv.ogg"
-}
-
-// Resources for pre-loading
-rss.resources = [];
-for (var i in rss.res) {
-    rss.resources.push(rss.res[i]);
-}
-
-rss.spaceship = {
-    mass: 1
-}
-rss.spaceship.maxImp = rss.spaceship.mass * 50
-
-rss.tag = {
-    player: 1,
-    ground: 2,
-    fuel: 3,
-    landingPad: 4,
-    startFinish: 5,
-    star: 6,
-    invisible: 7,
-
-    gameLayer: 99,
-    statsLayer: 98
-}
-
-rss.player = {
-    states: {
-        landed: 0,
-        flying: 1,
-        refuelling: 2,
-        crashed: 9
-    }
-}
-
-rss.player.stateNames = {
-    0: "landed",
-    1: "flying",
-    2: "refuelling",
-    9: "crashed"
-}
-
-rss.world = {
-    mass: 10000000,
-    states: {
-        stopped: 0,
-        moving: 1
-    }
-}
-
-rss.item = {
-    mass: 100000
-}
-
-rss.star = {
-    width: 30,
-    height: 30,
-    mass: 1
-}
-
-rss.landingPad = {
-    angle: 5
-}
-
-rss.game = {
-    states : {
-        ready: 0,
-        touched: 1,
-        started: 2
-    }
-}
-
-rss.game.stateNames = {
-    0: "ready",
-    1: "touched",
-    2: "started"
-}
-
-rss.levels = [
-    {
-        radius: 2000,
-        offset: 150,
-        omega: 0.20
-        //radius: 800,
-        //offset: 150,
-        //omega: 0.4
-    }
-]
 var rss = rss || {}
 
 cp.Space.prototype.addConstraints = function(constraints) {
@@ -646,6 +481,111 @@ rss.stop = function() {
     cc.director.pause()
     cc.audioEngine.stopMusic()
 }
+var rss = rss || {};
+
+//rss.physics = rss.box2D
+rss.physics = rss.chipmunk
+
+rss.g = 100
+rss.gravity = -500
+
+
+rss.keys = []
+
+rss.res = {
+    spritesheet_plist: "res/spritesheet.plist",
+    spritesheet_png: "res/spritesheet.png",
+
+    star_wav: "res/star.wav",
+    spaceship_ogg: "res/delta_iv.ogg"
+}
+
+// Resources for pre-loading
+rss.resources = [];
+for (var i in rss.res) {
+    rss.resources.push(rss.res[i]);
+}
+
+rss.spaceship = {
+    mass: 1
+}
+rss.spaceship.maxImp = rss.spaceship.mass * 50
+
+rss.tag = {
+    player: 1,
+    ground: 2,
+    fuel: 3,
+    landingPad: 4,
+    startFinish: 5,
+    star: 6,
+    invisible: 7,
+
+    gameLayer: 99,
+    statsLayer: 98
+}
+
+rss.player = {
+    states: {
+        landed: 0,
+        flying: 1,
+        refuelling: 2,
+        crashed: 9
+    }
+}
+
+rss.player.stateNames = {
+    0: "landed",
+    1: "flying",
+    2: "refuelling",
+    9: "crashed"
+}
+
+rss.world = {
+    mass: 10000000,
+    states: {
+        stopped: 0,
+        moving: 1
+    }
+}
+
+rss.item = {
+    mass: 100000
+}
+
+rss.star = {
+    width: 30,
+    height: 30,
+    mass: 1
+}
+
+rss.landingPad = {
+    angle: 5
+}
+
+rss.game = {
+    states : {
+        ready: 0,
+        touched: 1,
+        started: 2
+    }
+}
+
+rss.game.stateNames = {
+    0: "ready",
+    1: "touched",
+    2: "started"
+}
+
+rss.levels = [
+    {
+        radius: 2000,
+        offset: 150,
+        omega: 0.20
+        //radius: 800,
+        //offset: 150,
+        //omega: 0.4
+    }
+]
 rss.ui = {}
 
 rss.ui.linewidth = 2
@@ -1827,6 +1767,117 @@ var CompositeSprite = cc.Sprite.extend({
         this.getChildren()[i].setColor(color)
     }
 })
+var FuelMeter = cc.Node.extend({
+    ctor: function(args) {
+        this._super()
+
+        this.r = {}
+        this.r.pos = args.pos
+        this.r.size = args.size
+        this.r.width = args.size.width
+        this.r.height = args.size.height
+    },
+
+    init: function() {
+        this._super()
+
+        this.r.draw = new cc.DrawNode()
+        this.addChild(this.r.draw)
+        this.r.draw.setPosition(this.r.pos)
+
+        this.draw(1.0)
+
+        return this
+    },
+
+    draw: function(level) {
+        this.r.draw.clear()
+
+        cc.log("level: " + level)
+        var fuelColor = rss.colors.green
+        if (level <= 0.4) {
+            fuelColor = rss.colors.red
+        }
+
+        var depletion = (1.0 - level) * this.r.height
+        var bottomLeft = cc.p(-1 * this.r.width / 2, -1 * this.r.height / 2)
+        var topRight = cc.p(this.r.width / 2, this.r.height / 2)
+
+        // Outline
+        this.r.draw.drawRect(
+            bottomLeft,
+            topRight,
+            rss.setAlpha(fuelColor, 0),
+            2,
+            fuelColor, 255
+        )
+
+        // Fuel level
+        this.r.draw.drawRect(
+            bottomLeft,
+            rss.p.subY(topRight, (bottomLeft, depletion)),
+            rss.setAlpha(fuelColor, 170),
+            2,
+            rss.setAlpha(fuelColor, 170)
+        )
+    },
+
+    setLevel: function(level) {
+        this.draw(level)
+    }
+})
+
+FuelMeter.create = function(args) {
+    return new FuelMeter(args).init()
+}
+var AngleMeter = cc.Node.extend({
+    ctor: function(args) {
+        this._super()
+
+        this.r = {}
+        this.r.pos = args.pos
+        this.r.radius = args.radius
+    },
+
+    init: function() {
+        this._super()
+
+        this.r.draw = new cc.DrawNode()
+        this.addChild(this.r.draw)
+        this.r.draw.setPosition(this.r.pos)
+        this.draw(1.0)
+
+        return this
+    },
+
+    draw: function(level) {
+        this.r.draw.clear()
+
+        this.r.draw.drawCircle(
+            cc.p(0, 0),
+            this.r.radius,
+            rss.toRad(90) - level * rss.twoPI,
+            50,
+            false,
+            2,
+            rss.colors.red
+        )
+        this.r.draw.drawPoly(
+            rss.circSegmentVerts(this.r.radius, level * rss.twoPI, rss.toRad(90), 50, -1.0),
+            rss.setAlpha(rss.colors.red, 170),
+            2,
+            rss.colors.red
+        )
+    },
+
+    setLevel: function(level) {
+        this.draw(level)
+    }
+})
+
+AngleMeter.create = function(args) {
+    return new AngleMeter(args).init()
+}
 var World = rss.CircBody.extend({
     ctor: function(args) {
         this._super(args)
@@ -1869,6 +1920,397 @@ var World = rss.CircBody.extend({
 
 World.create = function(args) {
     return new World(args).init()
+}
+var Level = rss.CompositeDynamicBody.extend({
+    START_ANGLE: Math.PI / 2,
+
+    ctor: function(args) {
+        cc.log("Level.ctor ...")
+        args.size = rss.winsize()
+        args.pos = rss.center()
+        this._super(args)
+
+        this.cfg = rss.levels[args.level - 1]
+        cc.log("Level.ctor")
+    },
+
+    init:function() {
+        cc.log("Level.init ...")
+        this._super()
+
+        this.addWorldMachine()
+        this.addItems()
+
+        cc.log("Level.init")
+        return this
+    },
+
+    addWorldMachine: function() {
+        var world = World.create({
+            pos: rss.p.subY(rss.center(), this.cfg.radius + this.cfg.offset),
+            radius: this.cfg.radius,
+            offset: this.START_ANGLE,
+            mass: rss.world.mass,
+            color: rss.colors.red
+        })
+        world.setAngle(this.START_ANGLE)
+        rss.world.state = rss.world.states.moving
+        world.setCollisionType(rss.tag.ground)
+        this.addItem(world)
+        this.r.world = world
+
+        var box = rss.StaticRectBody.create({pos: this.getWorld().getPos(), size: cc.size(10, 10)})
+        this.addItem(box)
+        this.addConstraints(rss.pivotJoint(box, this.getWorld()))
+    },
+
+    addStartFinishPad: function(gap, width) {
+        gap = rss.toRad(gap)
+        width = rss.toRad(width)
+
+        var fromAng = this.end + gap
+
+        var base = this.addSegment(gap, width, 20)
+        base.setShouldPersist(true)
+        base.setCollisionType(rss.tag.landingPad)
+
+        // Required for some reason to
+        var base2 = this.addSegment(gap, width, 20)
+        base2.setShouldPersist(true)
+
+        finishSensor = this.addSegment(gap, width, rss.height() * 2)
+        finishSensor.setShouldPersist(true)
+        finishSensor.setCollisionType(rss.tag.startFinish)
+        finishSensor.setSensor(true)
+
+        this.end += gap + width
+    },
+
+    addStar: function(gap, height) {
+        var gap = rss.toRad(gap)
+        this.addStarAt(this.end + gap, height)
+    },
+
+    addStarAt: function(ang, height) {
+        var star = Star.create({
+            pos: cc.p(0, 0),
+            color: rss.colors.yellow
+        })
+        var starWidth = this.widthToRad(star.getWidth())
+        var p = rss.p.add(
+            this.getWorld().getPos(),
+            rss.polarToCartesian(
+                this.getWorld().getRadius() + height,
+                this.START_ANGLE - ang
+            )
+        )
+        star.setPos(p)
+        star.setCollisionType(rss.tag.star)
+        star.setSensor(true)
+        this.addItem(star)
+        star.attachToWorld(this.getWorld())
+        star.setAngle(rss.toDeg(ang))
+        this.addConstraints(star.getConstraints())
+    },
+
+    addObstacle: function(gap, width, height) {
+        gap = rss.toRad(gap)
+        width = rss.toRad(width)
+
+        var obstacle = this.addSegment(gap, width, height)
+        obstacle.setColor(rss.colors.red)
+        obstacle.setCollisionType(rss.tag.ground)
+
+        this.end += gap + width
+
+        return obstacle
+    },
+
+    addObstacleWithStar: function(gap, width, height) {
+        this.addObstacle(gap, width, height)
+        this.addStar(-1 * width / 2, height + 70)
+    },
+
+    /* Does not increment this.end */
+    addFloatingObstacle: function(gap, width, height, float) {
+        gap = rss.toRad(gap)
+        width = rss.toRad(width)
+
+        var obstacle = this.addSegment(gap, width, height, float)
+        obstacle.setColor(rss.colors.red)
+        obstacle.setCollisionType(rss.tag.ground)
+
+        return obstacle
+    },
+
+    addFuelStrip: function(gap, width, height) {
+        gap = rss.toRad(gap)
+        width = rss.toRad(width)
+
+        var strip = this.addSegment(gap, width, height)
+        strip.setColor(rss.colors.green)
+        strip.setCollisionType(rss.tag.fuel)
+        strip.setElasticity(0.0)
+        this.addConstraints(rss.fixedJoint(strip, this.getWorld(), this.START_ANGLE))
+
+        this.end += gap + width
+    },
+
+    addRoundObstacle: function(fromAng, toAng) {
+        fromAng = rss.toRad(fromAng)
+        toAng = rss.toRad(toAng)
+
+        var angle = this.START_ANGLE - (fromAng + (toAng - fromAng) / 2)
+        var p = rss.polarToCartesian(this.r.radius, angle)
+
+        var item = rss.CircBody.create({
+            pos: rss.p.add(this.getWorld().getPos(), p),
+            radius: this.radToWidth(toAng - fromAng),
+            mass: rss.item.mass
+        })
+        item.setCollisionType(rss.tag.ground)
+        this.addConstraints(rss.fixedJoint(item, this.getWorld(), this.START_ANGLE))
+        this.addItem(item)
+
+        this.end += gap + width
+    },
+
+    addSegment: function(gap, width, height, float) {
+        return this.addSegmentAt(this.end + gap, width, height, float)
+    },
+
+    addSegmentAtDeg: function(ang, width, height, float) {
+        return this.addSegmentAt(rss.toRad(ang), rss.toRad(width), height, float)
+    },
+
+    addSegmentAt: function(ang, width, height, float) {
+        if (height && float) {
+            length = height / (this.getWorld().getRadius() + float)
+        }
+        else {
+            float = 0
+            length = 1
+        }
+
+        var item = rss.CircSegmentBody.create({
+            pos: this.getWorld().getPos(),
+            size: cc.size(width, length),
+            radius: this.getWorld().getRadius() + float + height,
+            // Use 20 segments per 5 degrees
+            segments: 20 * rss.toDeg(width) / 5,
+            startAngle: ang,
+            offset: this.START_ANGLE - ang,
+            mass: rss.item.mass,
+            space: rss.game.space,
+            omega: this.cfg.omega
+        })
+        item.setLocalZOrder(-10)
+        this.addConstraints(rss.fixedJoint(item, this.getWorld(), this.START_ANGLE))
+
+        return this.addItem(item)
+    },
+
+    addItem: function(item) {
+        item.setGroup(rss.tag.ground)
+        this.addComp(item)
+        this.getParent().addChild(item)
+
+        return item
+    },
+
+    widthToRad: function(width) {
+        return width / this.getWorld().getRadius()
+    },
+
+    widthToDeg: function(width) {
+        return cc.radiansToDegrees((this.widthToRad(width)))
+    },
+
+    radToWidth: function(rad) {
+        return this.r.radius * rad
+    },
+
+    degToWidth: function(deg) {
+        return this.radToWidth(cc.degreesToRadians(deg))
+    },
+
+    stop: function() {
+        rss.world.state = rss.world.states.stopped
+    },
+
+    resume: function() {
+        rss.world.state = rss.world.states.moving
+    },
+
+    getAngle: function() {
+        return this.getWorld().getAngle()
+    },
+
+    getWorld: function() {
+        return this.r.world
+    },
+
+    update: function(dt) {
+        if ((rss.world.state == rss.world.states.moving) && (rss.game.state == rss.game.states.touched)) {
+            this.getWorld().setAngVel(this.cfg.omega)
+        }
+        else if (rss.world.state == rss.world.states.stopped) {
+            this.getWorld().setAngVel(0)
+        }
+
+        this.r.comps.forEach(function(comp){
+            if (typeof comp.update != "undefined") {
+                comp.update(dt)
+            }
+        })
+    }
+})
+var Level1 = Level.extend({
+    addItems: function() {
+        this.end = rss.toRad(-1.0 * rss.landingPad.angle / 2)
+        this.addStartFinishPad(0, rss.landingPad.angle)
+
+        this.addObstacleWithStar(5, 2, 30)
+        this.addObstacleWithStar(2, 2, 40)
+        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacleWithStar(2, 2, 60)
+        this.addObstacleWithStar(2, 2, 70)
+
+        this.addFuelStrip(2, 20, 20)
+
+        this.addObstacle(5, 2, 30)
+        this.addObstacle(2, 2, 60)
+        this.addObstacle(2, 2, 90)
+        this.addObstacle(2, 2, 120)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 130)
+        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacleWithStar(2, 2, 40)
+        this.addObstacleWithStar(2, 2, 30)
+        this.addObstacle(2, 2, 110)
+        this.addObstacle(2, 2, 120)
+
+        this.addFloatingObstacle(10, 2, 30, 300)
+        this.addObstacleWithStar(10, 2, 100, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 300)
+        this.addObstacleWithStar(0, 2, 100, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 300)
+        this.addObstacleWithStar(0, 2, 100, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 300)
+        this.addObstacleWithStar(0, 2, 100, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 300)
+        this.addObstacleWithStar(0, 2, 100, 150)
+
+        this.addFuelStrip(2, 20, 20)
+
+        this.addObstacle(8, 2, 120)
+        this.addObstacle(2, 2, 100)
+        this.addObstacleWithStar(2, 2, 70)
+        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacleWithStar(2, 2, 30)
+
+        this.addFloatingObstacle(5, 2, 30, 250)
+        this.addObstacleWithStar(5, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithStar(0, 2, 50, 150)
+
+        this.addFuelStrip(1, 15, 20)
+
+
+        this.addObstacle(4, 3, 70)
+        this.addObstacle(2, 3, 90)
+        this.addObstacle(2, 3, 110)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 140)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 80)
+        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacleWithStar(2, 2, 40)
+        this.addFuelStrip(1, 15, 20)
+        this.addObstacleWithStar(2, 2, 30)
+        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacle(2, 2, 110)
+        this.addObstacle(2, 2, 140)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 110)
+        this.addObstacle(2, 2, 90)
+        this.addObstacle(4, 3, 90)
+        this.addObstacle(2, 3, 80)
+        this.addObstacle(2, 3, 70)
+
+        //this.addFuelStrip(3, 30)
+
+        //this.addFloatingObstacle(15, 2, 30, 250)
+        //this.addObstacleWithStar(15, 2, 50, 150)
+        //
+        //this.addFloatingObstacle(0, 2, 30, 250)
+        //this.addObstacleWithStar(0, 2, 50, 150)
+        //
+        //this.addFloatingObstacle(0, 2, 30, 250)
+        //this.addObstacleWithStar(0, 2, 50, 150)
+        //
+        //this.addFloatingObstacle(0, 2, 30, 250)
+        //this.addObstacleWithStar(0, 2, 50, 150)
+        //
+        //this.addFloatingObstacle(0, 2, 30, 250)
+        //this.addObstacleWithStar(0, 2, 50, 150)
+        //
+        //this.addObstacle(4, 3, 50)
+        //this.addObstacle(2, 3, 70)
+        //this.addObstacle(2, 3, 90)
+        //this.addObstacle(2, 3, 110)
+        //this.addObstacle(2, 3, 130)
+        //this.addObstacle(2, 3, 130)
+        //
+        //this.addObstacle(5, 3, 70)
+        //this.addObstacle(2, 3, 130)
+        //this.addObstacle(2, 3, 170)
+        //this.addObstacle(2, 2, 130)
+        //this.addObstacle(2, 3, 170)
+        //this.addObstacle(2, 3, 170)
+        //this.addObstacle(2, 2, 130)
+        //this.addObstacle(2, 2, 130)
+        //this.addObstacle(2, 2, 130)
+        //
+        //this.addObstacle(4, 2, 150)
+        //this.addObstacle(2, 2, 170)
+        //this.addObstacle(2, 2, 50)
+        //this.addObstacle(2, 2, 30)
+        //this.addObstacle(3, 2, 170)
+        //this.addObstacle(3, 3, 180)
+        //this.addObstacle(3, 3, 140)
+        //this.addObstacle(2, 2, 120)
+        //this.addObstacle(2, 3, 50)
+        //this.addObstacle(3, 3, 130)
+        //this.addObstacle(2, 2, 120)
+        //this.addObstacle(2, 3, 50)
+        //this.addObstacle(3, 3, 130)
+        //this.addObstacle(2, 2, 120)
+        //this.addObstacle(2, 3, 50)
+        //this.addObstacle(3, 3, 130)
+        //this.addObstacle(2, 2, 120)
+        //this.addObstacle(2, 3, 50)
+        //this.addObstacle(3, 3, 130)
+        //this.addObstacle(2, 2, 120)
+    }
+})
+
+Level1.create = function(args) {
+    return new Level1(args).init()
 }
 rss.BaseLayer = cc.Layer.extend({
     ctor: function(){
@@ -2365,3 +2807,64 @@ var GameOverScene = rss.BaseScene.extend({
         this.addChild(GameOverLayer.create());
     }
 });
+
+/**
+ * A brief explanation for "project.json":
+ * Here is the content of project.json file, this is the global configuration for your game, you can modify it to customize some behavior.
+ * The detail of each field is under it.
+ {
+    "project_type": "javascript",
+    // "project_type" indicate the program language of your project, you can ignore this field
+
+    "debugMode"     : 1,
+    // "debugMode" possible values :
+    //      0 - No message will be printed.
+    //      1 - cc.error, cc.assert, cc.warn, cc.log will print in console.
+    //      2 - cc.error, cc.assert, cc.warn will print in console.
+    //      3 - cc.error, cc.assert will print in console.
+    //      4 - cc.error, cc.assert, cc.warn, cc.log will print on canvas, available only on web.
+    //      5 - cc.error, cc.assert, cc.warn will print on canvas, available only on web.
+    //      6 - cc.error, cc.assert will print on canvas, available only on web.
+
+    "showFPS"       : true,
+    // Left bottom corner fps information will show when "showFPS" equals true, otherwise it will be hide.
+
+    "frameRate"     : 60,
+    // "frameRate" set the wanted frame rate for your game, but the real fps depends on your game implementation and the running environment.
+
+    "id"            : "gameCanvas",
+    // "gameCanvas" sets the id of your canvas element on the web page, it's useful only on web.
+
+    "renderMode"    : 0,
+    // "renderMode" sets the renderer type, only useful on web :
+    //      0 - Automatically chosen by engine
+    //      1 - Forced to use canvas renderer
+    //      2 - Forced to use WebGL renderer, but this will be ignored on mobile browsers
+
+    "engineDir"     : "frameworks/cocos2d-html5/",
+    // In debug mode, if you use the whole engine to develop your game, you should specify its relative path with "engineDir",
+    // but if you are using a single engine file, you can ignore it.
+
+    "modules"       : ["cocos2d"],
+    // "modules" defines which modules you will need in your game, it's useful only on web,
+    // using this can greatly reduce your game's resource size, and the cocos console tool can package your game with only the modules you set.
+    // For details about modules definitions, you can refer to "../../frameworks/cocos2d-html5/modulesConfig.json".
+
+    "jsList"        : [
+    ]
+    // "jsList" sets the list of js files in your game.
+ }
+ *
+ */
+
+cc.game.onStart = function(){
+    cc.view.adjustViewPort(true);
+    cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.resizeWithBrowserSize(true);
+    //load resources
+    cc.LoaderScene.preload(rss.resources, function () {
+        //cc.director.runScene(new MenuScene());
+        cc.director.runScene(new GameScene());
+    }, this);
+};
+cc.game.run();
