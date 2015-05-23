@@ -1,3 +1,5 @@
+cc.log("LOADED")
+
 var rss = rss || {};
 
 rss.chipmunk = "chipmunk"
@@ -449,9 +451,9 @@ rss.floatingCircSegmentVerts = function(radius, angle, offset, segments, heightF
 rss.starVerts = function(nRays, r1, r2, rayWidth) {
     verts = []
     var theta = rss.twoPI / nRays
-    for (var n = 0; n < nRays; ++n) {
-        verts.push(rss.polarToCartesian(r1, n * theta))
-        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta))
+    for (var n= 0; n < nRays; ++n) {
+        verts.push(rss.polarToCartesian(r1, n * theta + Math.PI / 2))
+        verts.push(rss.polarToCartesian(r2, (n + 1/2) * theta + Math.PI / 2))
     }
     return verts
 }
@@ -478,8 +480,11 @@ rss.log = function(str) {
 }
 
 rss.stop = function() {
-    cc.director.pause()
     cc.audioEngine.stopMusic()
+    cc.audioEngine.stopAllEffects()
+    // Above does not stop background music mid-file!
+    cc.audioEngine.setMusicVolume(0)
+    cc.director.pause()
 }
 var rss = rss || {};
 
@@ -497,7 +502,8 @@ rss.res = {
     spritesheet_png: "res/spritesheet.png",
 
     star_wav: "res/star.wav",
-    spaceship_ogg: "res/delta_iv.ogg"
+    spaceship_ogg: "res/delta_iv.ogg",
+    refuel_wav: "res/refuel.wav"
 }
 
 // Resources for pre-loading
@@ -506,19 +512,15 @@ for (var i in rss.res) {
     rss.resources.push(rss.res[i]);
 }
 
-rss.spaceship = {
-    mass: 1
-}
-rss.spaceship.maxImp = rss.spaceship.mass * 50
-
 rss.tag = {
     player: 1,
     ground: 2,
     fuel: 3,
     landingPad: 4,
     startFinish: 5,
-    star: 6,
-    invisible: 7,
+    yellowStar: 6,
+    redStar: 7,
+    purpleStar: 8,
 
     gameLayer: 99,
     statsLayer: 98
@@ -539,6 +541,17 @@ rss.player.stateNames = {
     2: "refuelling",
     9: "crashed"
 }
+
+rss.spaceship = {
+    mass: 1,
+    powerUps: {
+        6: 2,
+        7: 5,
+        8: 10
+    },
+    fuelBurnRate: 0.25,
+}
+rss.spaceship.maxImp = rss.spaceship.mass * 50
 
 rss.world = {
     mass: 10000000,
@@ -581,49 +594,11 @@ rss.levels = [
         radius: 2000,
         offset: 150,
         omega: 0.20
-        //radius: 800,
-        //offset: 150,
+        //radius: 200,
+        //offset: -200,
         //omega: 0.4
     }
 ]
-rss.ui = {}
-
-rss.ui.linewidth = 2
-
-rss.ui.button = function(sprites) {
-    var btn = new CompositeSprite(["#button_outer.png", sprites[0], sprites[1]])
-    btn.setColor(rss.colors.white)
-    btn.setChildColor(0, rss.colors.black)
-    btn.setChildColor(1, rss.colors.white)
-    return btn
-}
-
-rss.ui.buttons = function(sprites) {
-    var buttons = {
-        normal: rss.ui.button(sprites[0]),
-        selected: rss.ui.button(sprites[1])
-    }
-
-    return buttons
-}
-
-rss.ui.restartButton = function() {
-    return rss.ui.buttons(
-        [
-            ["button_n_inner.png", "restart_n_text.png"],
-            ["button_s_inner.png", "restart_s_text.png"]
-        ]
-    )
-}
-
-rss.ui.startButton = function() {
-    return rss.ui.buttons(
-        [
-            ["button_n_inner.png", "start_n_text.png"],
-            ["button_s_inner.png", "start_s_text.png"]
-        ]
-    )
-}
 rss.StaticBody = cc.Node.extend({
     ctor: function(args) {
         this._super()
@@ -645,7 +620,7 @@ rss.StaticBody = cc.Node.extend({
     },
 
     init: function() {
-        rss.log("StaticBody.init ...")
+        //rss.log("StaticBody.init ...")
         this._super()
     },
 
@@ -657,11 +632,11 @@ rss.StaticBody = cc.Node.extend({
     removeFromSpace: function(space) {
         var body = this.getBody()
         if (typeof body == "object") {
-            //rss.log("CHECKING CONSTRAINTS")
+            ////rss.log("CHECKING CONSTRAINTS")
             //space.constraints.forEach(function(constr) {
-            //    //rss.log("CHECKING CONSTRAINT")
+            //    ////rss.log("CHECKING CONSTRAINT")
             //    if ((constr.a == body) || (constr.b == body)) {
-            //        rss.log("REMOVING CONSTRAINT")
+            //        //rss.log("REMOVING CONSTRAINT")
             //        space.removeConstraint(constr)
             //    }
             //})
@@ -803,7 +778,7 @@ rss.CompositeStaticBody = rss.StaticBody.extend({
     },
 
     init: function() {
-        cc.log("CompositeStaticBody.init ...")
+        //cc.log("CompositeStaticBody.init ...")
         this._super()
 
         if (typeof this.getColor() == "object") {
@@ -1068,7 +1043,7 @@ rss.StaticRectBody = rss.StaticBody.extend({
     },
 
     init: function() {
-        cc.log("StaticRectBody.init ...")
+        //cc.log("StaticRectBody.init ...")
         this._super()
 
         if (rss.physics == rss.chipmunk) {
@@ -1082,7 +1057,7 @@ rss.StaticRectBody = rss.StaticBody.extend({
     },
     
     initChipmunk: function() {
-        cc.log("StaticRectBody.initChipmunk ...")
+        //cc.log("StaticRectBody.initChipmunk ...")
         // body
         this.r.body = new cp.StaticBody()
         this.r.body.setPos(this.getStartPos())
@@ -1162,7 +1137,7 @@ rss.CircBody = rss.DynamicBody.extend({
     },
 
     initChipmunk: function() {
-        cc.log("Ball.init ...")
+        //cc.log("Ball.init ...")
         this._super()
 
         this.r.body = new cp.Body(this.r.mass, cp.momentForCircle(this.r.mass, 0, this.r.radius, cp.v(0,0)))
@@ -1375,8 +1350,8 @@ rss.PolyBody = rss.DynamicBody.extend({
         verts.push(p.x, p.y)
 
         for (var i = 0; i < verts.length; i += 2) {
-            cc.log("x: " + verts[i])
-            cc.log("y: " + verts[i+1])
+            //cc.log("x: " + verts[i])
+            //cc.log("y: " + verts[i+1])
         }
 
         //this.r.shape = new cp.PolyShape(this.r.body, verts, cp.v(0, 0))
@@ -1459,7 +1434,7 @@ rss.CircSegmentBody = rss.DynamicBody.extend({
             this.initMe()
         }
         else {
-            cc.log("angle should be greater than zero!")
+            //cc.log("angle should be greater than zero!")
         }
 
         return this
@@ -1576,7 +1551,7 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
     DEG_HORIZONTAL: 0,
 
     ctor:function(args) {
-        cc.log("Spaceship.ctor ...")
+        //cc.log("Spaceship.ctor ...")
         args.spriteFrame = "#spaceship_nofire.png"
         args.scale = 0.5
         args.mass = rss.spaceship.mass
@@ -1587,7 +1562,7 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
     },
 
     init:function() {
-        cc.log("Spaceship.init ...")
+        //cc.log("Spaceship.init ...")
         this._super()
 
         this.r.fuel = 100
@@ -1603,12 +1578,21 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
         this.r.body.setVel(cp.v(vx, vy))
     },
 
+    powerUp: function() {
+        this.incFuel(rss.spaceship.powerUp)
+    },
+
     incFuel: function() {
-        this.r.fuel = Math.min(100, this.r.fuel + 1)
+        this.incFuel(2)
+    },
+
+    incFuel: function(amount) {
+        this.r.fuel = Math.min(100, this.r.fuel + amount)
+        cc.audioEngine.playEffect(rss.res.refuel_wav)
     },
 
     decFuel: function() {
-        this.r.fuel = Math.max(0, this.r.fuel - 0.5)
+        this.r.fuel = Math.max(0, this.r.fuel - rss.spaceship.fuelBurnRate)
     },
 
     getAngle: function() {
@@ -1690,6 +1674,7 @@ var Star = rss.CircBody.extend({
         this._super(args)
 
         this.r.shouldDraw = true
+        this.r.drawOffset = args.drawOffset
     },
 
     init: function() {
@@ -1698,11 +1683,17 @@ var Star = rss.CircBody.extend({
         this.setCollisionType(rss.tag.star)
         this.setSensor(true)
 
+        this.r.draw.setPosition(this.getPos())
+
+        this.r.draw.setRotation(rss.toDeg(this.r.drawOffset))
+
+        this.draw()
+
         return this
     },
 
-    attachToWorld: function(world) {
-        this.r.constraints = rss.fixedJoint(this, world, world.START_ANGLE)
+    attachToWorld: function(world, offset) {
+        this.r.constraints = rss.fixedJoint(this, world, offset)
     },
 
     getConstraints: function() {
@@ -1712,7 +1703,6 @@ var Star = rss.CircBody.extend({
     draw: function() {
         this.r.draw.clear()
         this.r.draw.setPosition(this.getPos())
-        //this.r.draw.setRotation(rss.toDeg(this.getAngle()))
         this.r.draw.drawPoly(
             rss.starVerts(5, this.r.radius, this.r.radius * 0.5, this.r.radius * 0.2),
             rss.setAlpha(this.getColor(), 128),
@@ -1721,7 +1711,10 @@ var Star = rss.CircBody.extend({
         )
     },
 
+
     update: function() {
+        this.r.draw.setRotation(rss.toDeg(this.r.drawOffset) - this.getAngleDeg())
+
         if (this.r.shouldDraw) {
             this.draw()
         }
@@ -1736,7 +1729,7 @@ var CompositeSprite = cc.Sprite.extend({
     components: null,
 
     ctor: function(resources) {
-        cc.log("Sprite.ctor ...")
+        //cc.log("Sprite.ctor ...")
         this._super(resources.shift());
 
         this.child_resources = resources
@@ -1793,7 +1786,7 @@ var FuelMeter = cc.Node.extend({
     draw: function(level) {
         this.r.draw.clear()
 
-        cc.log("level: " + level)
+        //cc.log("level: " + level)
         var fuelColor = rss.colors.green
         if (level <= 0.4) {
             fuelColor = rss.colors.red
@@ -1925,23 +1918,23 @@ var Level = rss.CompositeDynamicBody.extend({
     START_ANGLE: Math.PI / 2,
 
     ctor: function(args) {
-        cc.log("Level.ctor ...")
+        //cc.log("Level.ctor ...")
         args.size = rss.winsize()
         args.pos = rss.center()
         this._super(args)
 
         this.cfg = rss.levels[args.level - 1]
-        cc.log("Level.ctor")
+        //cc.log("Level.ctor")
     },
 
     init:function() {
-        cc.log("Level.init ...")
+        //cc.log("Level.init ...")
         this._super()
 
         this.addWorldMachine()
         this.addItems()
 
-        cc.log("Level.init")
+        //cc.log("Level.init")
         return this
     },
 
@@ -1971,14 +1964,17 @@ var Level = rss.CompositeDynamicBody.extend({
         var fromAng = this.end + gap
 
         var base = this.addSegment(gap, width, 20)
+        base.setColor(rss.colors.white)
         base.setShouldPersist(true)
         base.setCollisionType(rss.tag.landingPad)
 
         // Required for some reason to
         var base2 = this.addSegment(gap, width, 20)
+        base2.setColor(rss.colors.white)
         base2.setShouldPersist(true)
 
         finishSensor = this.addSegment(gap, width, rss.height() * 2)
+        finishSensor.setColor(rss.colors.white)
         finishSensor.setShouldPersist(true)
         finishSensor.setCollisionType(rss.tag.startFinish)
         finishSensor.setSensor(true)
@@ -1986,31 +1982,36 @@ var Level = rss.CompositeDynamicBody.extend({
         this.end += gap + width
     },
 
-    addStar: function(gap, height) {
-        var gap = rss.toRad(gap)
-        this.addStarAt(this.end + gap, height)
+    addStar: function(gap, height, color) {
+        return this.addStarAt(this.end + rss.toRad(gap), height, color)
     },
 
-    addStarAt: function(ang, height) {
-        var star = Star.create({
-            pos: cc.p(0, 0),
-            color: rss.colors.yellow
-        })
-        var starWidth = this.widthToRad(star.getWidth())
-        var p = rss.p.add(
+    addStarAt: function(ang, height, color) {
+        color = color || rss.colors.yellow
+
+        var pos = rss.p.add(
             this.getWorld().getPos(),
             rss.polarToCartesian(
                 this.getWorld().getRadius() + height,
                 this.START_ANGLE - ang
             )
         )
-        star.setPos(p)
+
+        var star = Star.create({
+            pos: pos,
+            color: color,
+            drawOffset: ang
+        })
+        var starWidth = this.widthToRad(star.getWidth())
+
         star.setCollisionType(rss.tag.star)
         star.setSensor(true)
         this.addItem(star)
-        star.attachToWorld(this.getWorld())
-        star.setAngle(rss.toDeg(ang))
+        star.attachToWorld(this.getWorld(), this.START_ANGLE)
+        star.draw()
         this.addConstraints(star.getConstraints())
+
+        return star
     },
 
     addObstacle: function(gap, width, height) {
@@ -2026,9 +2027,22 @@ var Level = rss.CompositeDynamicBody.extend({
         return obstacle
     },
 
-    addObstacleWithStar: function(gap, width, height) {
+    addObstacleWithRedStar: function(gap, width, height) {
         this.addObstacle(gap, width, height)
-        this.addStar(-1 * width / 2, height + 70)
+        var star = this.addStar(-1 * width / 2, height + 70, rss.colors.red)
+        star.setCollisionType(rss.tag.redStar)
+    },
+
+    addObstacleWithPurpleStar: function(gap, width, height) {
+        this.addObstacle(gap, width, height)
+        var star = this.addStar(-1 * width / 2, height + 70, rss.colors.purple)
+        star.setCollisionType(rss.tag.purpleStar)
+    },
+
+    addObstacleWithYellowStar: function(gap, width, height) {
+        this.addObstacle(gap, width, height)
+        var star = this.addStar(-1 * width / 2, height + 70, rss.colors.yellow)
+        star.setCollisionType(rss.tag.yellowStar)
     },
 
     /* Does not increment this.end */
@@ -2170,66 +2184,59 @@ var Level1 = Level.extend({
         this.end = rss.toRad(-1.0 * rss.landingPad.angle / 2)
         this.addStartFinishPad(0, rss.landingPad.angle)
 
-        this.addObstacleWithStar(5, 2, 30)
-        this.addObstacleWithStar(2, 2, 40)
-        this.addObstacleWithStar(2, 2, 50)
-        this.addObstacleWithStar(2, 2, 60)
-        this.addObstacleWithStar(2, 2, 70)
+        this.addObstacleWithYellowStar(5, 2, 30)
+        this.addObstacleWithYellowStar(2, 2, 40)
+        this.addObstacleWithYellowStar(2, 2, 50)
+        this.addObstacleWithYellowStar(2, 2, 60)
+        this.addObstacleWithYellowStar(2, 2, 70)
 
-        this.addFuelStrip(2, 20, 20)
-
-        this.addObstacle(5, 2, 30)
-        this.addObstacle(2, 2, 60)
-        this.addObstacle(2, 2, 90)
-        this.addObstacle(2, 2, 120)
-        this.addObstacle(2, 2, 130)
-        this.addObstacle(2, 2, 130)
-        this.addObstacleWithStar(2, 2, 50)
-        this.addObstacleWithStar(2, 2, 40)
-        this.addObstacleWithStar(2, 2, 30)
+        //this.addObstacle(5, 2, 30)
+        //this.addObstacle(2, 2, 60)
+        //this.addObstacle(2, 2, 90)
+        //this.addObstacle(2, 2, 120)
+        //this.addObstacle(2, 2, 130)
+        //this.addObstacle(2, 2, 130)
+        this.addObstacleWithYellowStar(2, 2, 50)
+        this.addObstacleWithRedStar(2, 2, 40)
+        this.addObstacleWithPurpleStar(2, 2, 30)
         this.addObstacle(2, 2, 110)
         this.addObstacle(2, 2, 120)
 
         this.addFloatingObstacle(10, 2, 30, 300)
-        this.addObstacleWithStar(10, 2, 100, 150)
+        this.addObstacleWithYellowStar(10, 2, 100, 150)
 
         this.addFloatingObstacle(0, 2, 30, 300)
-        this.addObstacleWithStar(0, 2, 100, 150)
+        this.addObstacleWithYellowStar(0, 2, 100, 150)
 
         this.addFloatingObstacle(0, 2, 30, 300)
-        this.addObstacleWithStar(0, 2, 100, 150)
+        this.addObstacleWithYellowStar(0, 2, 100, 150)
 
         this.addFloatingObstacle(0, 2, 30, 300)
-        this.addObstacleWithStar(0, 2, 100, 150)
+        this.addObstacleWithYellowStar(0, 2, 100, 150)
 
         this.addFloatingObstacle(0, 2, 30, 300)
-        this.addObstacleWithStar(0, 2, 100, 150)
-
-        this.addFuelStrip(2, 20, 20)
+        this.addObstacleWithYellowStar(0, 2, 100, 150)
 
         this.addObstacle(8, 2, 120)
         this.addObstacle(2, 2, 100)
-        this.addObstacleWithStar(2, 2, 70)
-        this.addObstacleWithStar(2, 2, 50)
-        this.addObstacleWithStar(2, 2, 30)
+        this.addObstacleWithYellowStar(2, 2, 70)
+        this.addObstacleWithYellowStar(2, 2, 50)
+        this.addObstacleWithYellowStar(2, 2, 30)
 
         this.addFloatingObstacle(5, 2, 30, 250)
-        this.addObstacleWithStar(5, 2, 50, 150)
+        this.addObstacleWithYellowStar(5, 2, 50, 150)
 
         this.addFloatingObstacle(0, 2, 30, 250)
-        this.addObstacleWithStar(0, 2, 50, 150)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
 
         this.addFloatingObstacle(0, 2, 30, 250)
-        this.addObstacleWithStar(0, 2, 50, 150)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
 
         this.addFloatingObstacle(0, 2, 30, 250)
-        this.addObstacleWithStar(0, 2, 50, 150)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
 
         this.addFloatingObstacle(0, 2, 30, 250)
-        this.addObstacleWithStar(0, 2, 50, 150)
-
-        this.addFuelStrip(1, 15, 20)
-
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
 
         this.addObstacle(4, 3, 70)
         this.addObstacle(2, 3, 90)
@@ -2238,11 +2245,9 @@ var Level1 = Level.extend({
         this.addObstacle(2, 2, 140)
         this.addObstacle(2, 2, 130)
         this.addObstacle(2, 2, 80)
-        this.addObstacleWithStar(2, 2, 50)
-        this.addObstacleWithStar(2, 2, 40)
-        this.addFuelStrip(1, 15, 20)
-        this.addObstacleWithStar(2, 2, 30)
-        this.addObstacleWithStar(2, 2, 50)
+        this.addObstacleWithYellowStar(2, 2, 50)
+        this.addObstacleWithYellowStar(2, 2, 40)
+        this.addObstacleWithYellowStar(2, 2, 50)
         this.addObstacle(2, 2, 110)
         this.addObstacle(2, 2, 140)
         this.addObstacle(2, 2, 130)
@@ -2252,46 +2257,45 @@ var Level1 = Level.extend({
         this.addObstacle(2, 3, 80)
         this.addObstacle(2, 3, 70)
 
-        //this.addFuelStrip(3, 30)
 
-        //this.addFloatingObstacle(15, 2, 30, 250)
-        //this.addObstacleWithStar(15, 2, 50, 150)
-        //
-        //this.addFloatingObstacle(0, 2, 30, 250)
-        //this.addObstacleWithStar(0, 2, 50, 150)
-        //
-        //this.addFloatingObstacle(0, 2, 30, 250)
-        //this.addObstacleWithStar(0, 2, 50, 150)
-        //
-        //this.addFloatingObstacle(0, 2, 30, 250)
-        //this.addObstacleWithStar(0, 2, 50, 150)
-        //
-        //this.addFloatingObstacle(0, 2, 30, 250)
-        //this.addObstacleWithStar(0, 2, 50, 150)
-        //
-        //this.addObstacle(4, 3, 50)
-        //this.addObstacle(2, 3, 70)
-        //this.addObstacle(2, 3, 90)
-        //this.addObstacle(2, 3, 110)
-        //this.addObstacle(2, 3, 130)
-        //this.addObstacle(2, 3, 130)
-        //
-        //this.addObstacle(5, 3, 70)
-        //this.addObstacle(2, 3, 130)
-        //this.addObstacle(2, 3, 170)
-        //this.addObstacle(2, 2, 130)
-        //this.addObstacle(2, 3, 170)
-        //this.addObstacle(2, 3, 170)
-        //this.addObstacle(2, 2, 130)
-        //this.addObstacle(2, 2, 130)
-        //this.addObstacle(2, 2, 130)
-        //
-        //this.addObstacle(4, 2, 150)
-        //this.addObstacle(2, 2, 170)
-        //this.addObstacle(2, 2, 50)
-        //this.addObstacle(2, 2, 30)
-        //this.addObstacle(3, 2, 170)
-        //this.addObstacle(3, 3, 180)
+        this.addFloatingObstacle(15, 2, 30, 250)
+        this.addObstacleWithYellowStar(15, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
+
+        this.addFloatingObstacle(0, 2, 30, 250)
+        this.addObstacleWithYellowStar(0, 2, 50, 150)
+
+        this.addObstacle(4, 3, 50)
+        this.addObstacle(2, 3, 70)
+        this.addObstacle(2, 3, 90)
+        this.addObstacle(2, 3, 110)
+        this.addObstacle(2, 3, 130)
+        this.addObstacle(2, 3, 130)
+
+        this.addObstacle(5, 3, 70)
+        this.addObstacle(2, 3, 130)
+        this.addObstacle(2, 3, 170)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 3, 170)
+        this.addObstacle(2, 3, 170)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 130)
+        this.addObstacle(2, 2, 130)
+
+        this.addObstacle(4, 2, 150)
+        this.addObstacle(2, 2, 170)
+        this.addObstacle(2, 2, 50)
+        this.addObstacle(2, 2, 30)
+        this.addObstacle(3, 2, 170)
+        this.addObstacle(3, 3, 180)
         //this.addObstacle(3, 3, 140)
         //this.addObstacle(2, 2, 120)
         //this.addObstacle(2, 3, 50)
@@ -2338,7 +2342,7 @@ var MoveableObjectsLayer = rss.BaseLayer.extend({
 })
 var GameLayer = rss.BaseLayer.extend({
     ctor: function(space) {
-        cc.log("GameLayer.ctor ...")
+        //cc.log("GameLayer.ctor ...")
         this._super();
 
         //this._debugNode = new cc.PhysicsDebugNode(rss.game.space);
@@ -2346,7 +2350,7 @@ var GameLayer = rss.BaseLayer.extend({
         //this.addChild(this._debugNode, 10);
 
         this.constructListeners()
-        cc.log("GameLayer.ctor")
+        //cc.log("GameLayer.ctor")
     },
 
     constructListeners: function() {
@@ -2394,13 +2398,13 @@ var GameLayer = rss.BaseLayer.extend({
         this.initActors()
 
         rss.game.state = rss.game.states.ready
-        cc.log("Ready!")
+        //cc.log("Ready!")
 
         return this
     },
 
     initActors: function() {
-        cc.log("GameLayer.init ...")
+        //cc.log("GameLayer.init ...")
 
         var level = new Level1({level: 1})
         this.addChild(level)
@@ -2567,12 +2571,12 @@ StatsLayer.create = function() {
 }
 var MenuLayer = rss.BaseLayer.extend({
     ctor : function(){
-        cc.log("MenuLayer.ctor ...")
+        //cc.log("MenuLayer.ctor ...")
         this._super();
     },
 
     init:function(){
-        cc.log("MenuLayer.init ...")
+        //cc.log("MenuLayer.init ...")
         this._super();
 
         var winsize = cc.director.getWinSize();
@@ -2590,7 +2594,7 @@ var MenuLayer = rss.BaseLayer.extend({
     },
 
     onPlay : function(){
-        cc.log("MenuLayer.onPlay ...")
+        //cc.log("MenuLayer.onPlay ...")
         cc.director.runScene(new GameScene());
     }
 });
@@ -2600,12 +2604,12 @@ MenuLayer.create = function() {
 }
 var GameOverLayer = rss.BaseLayer.extend({
     ctor : function(){
-        cc.log("MenuLayer.ctor ...")
+        //cc.log("MenuLayer.ctor ...")
         this._super();
     },
 
     init:function(){
-        cc.log("MenuLayer.init ...")
+        //cc.log("MenuLayer.init ...")
         this._super();
 
         var menuItemPlay = new cc.MenuItemSprite(
@@ -2637,7 +2641,7 @@ rss.BaseScene = cc.Scene.extend({
 })
 var MenuScene = rss.BaseScene.extend({
     onEnter:function () {
-        cc.log("MenuScene.onEnter ...")
+        //cc.log("MenuScene.onEnter ...")
         this._super();
 
         this.addChild(MenuLayer.create());
@@ -2646,7 +2650,7 @@ var MenuScene = rss.BaseScene.extend({
 
 var GameScene = rss.BaseScene.extend({
     onEnter:function () {
-        cc.log("Scene.onEnter ...")
+        //cc.log("Scene.onEnter ...")
         this._super()
 
         this.initPhysics()
@@ -2654,6 +2658,8 @@ var GameScene = rss.BaseScene.extend({
         this.addChild(GameLayer.create(rss.game.space), 0, rss.tag.gameLayer)
         this.addChild(StatsLayer.create(), 0, rss.tag.statsLayer)
 
+        cc.audioEngine.setMusicVolume(1)
+        cc.audioEngine.setEffectsVolume(0.5)
         this.scheduleUpdate();
     },
     
@@ -2694,8 +2700,24 @@ var GameScene = rss.BaseScene.extend({
 
         rss.game.space.addCollisionHandler(
             rss.tag.player,
-            rss.tag.star,
-            this.collisionStarBegin.bind(this),
+            rss.tag.yellowStar,
+            this.collisionYellowStarBegin.bind(this),
+            null,
+            null,
+            null)
+
+        rss.game.space.addCollisionHandler(
+            rss.tag.player,
+            rss.tag.redStar,
+            this.collisionRedStarBegin.bind(this),
+            null,
+            null,
+            null)
+
+        rss.game.space.addCollisionHandler(
+            rss.tag.player,
+            rss.tag.purpleStar,
+            this.collisionPurpleStarBegin.bind(this),
             null,
             null,
             null)
@@ -2703,10 +2725,11 @@ var GameScene = rss.BaseScene.extend({
 
     collisionGroundBegin:function () {
         if (rss.player.state != rss.player.states.refuelling) {
-            cc.log("collisionGround.begin")
+            //cc.log("collisionGround.begin")
             var player = this.getChildByTag(rss.tag.gameLayer).player
             rss.player.state = rss.player.states.crashed
-            cc.log("Game Over!")
+            //cc.log("Game Over!")
+            //cc.log("STOPPING")
             rss.stop()
             this.addChild(GameOverLayer.create())
         }
@@ -2716,14 +2739,14 @@ var GameScene = rss.BaseScene.extend({
 
     
     collisionGroundSeparate: function() {
-        cc.log("collisionGround.separate")
+        //cc.log("collisionGround.separate")
         if (rss.player.state != rss.player.states.refuelling) {
             rss.player.state = rss.player.states.flying
         }
     },
 
     collisionFuelBegin: function() {
-        cc.log("collisionFuel.begin")
+        //cc.log("collisionFuel.begin")
         rss.player.state = rss.player.states.refuelling
 
         // Absolutely required here - returning nothing gives same effect as returning false
@@ -2731,19 +2754,19 @@ var GameScene = rss.BaseScene.extend({
     },
 
     collisionFuelSeparate: function() {
-        cc.log("collisionFuel.separate")
+        //cc.log("collisionFuel.separate")
         rss.player.state = rss.player.states.flying
     },
 
     collisionLandingPadBegin: function() {
-        cc.log("collisionLandingPad.begin")
+        //cc.log("collisionLandingPad.begin")
         rss.world.state = rss.world.states.stopped
         // Absolutely required here - returning nothing gives same effect as returning false
         return true
     },
 
     collisionLandingPadSeparate: function() {
-        cc.log("collisionLandingPad.separate")
+        //cc.log("collisionLandingPad.separate")
         if ((rss.game.state == rss.game.states.touched) || (rss.game.state == rss.game.states.started)) {
             rss.player.state = rss.player.states.flying
             rss.world.state = rss.world.states.moving
@@ -2751,27 +2774,41 @@ var GameScene = rss.BaseScene.extend({
     },
 
     collisionStartFinishBegin: function() {
-        cc.log("collisionStartFinish.begin")
+        //cc.log("collisionStartFinish.begin")
         if (rss.game.state == rss.game.states.started) {
             this.getChildByTag(rss.tag.statsLayer).updateMsg("Completed!")
             rss.stop()
-            cc.log("GAME OVER")
+            //cc.log("GAME OVER")
             this.addChild(GameOverLayer.create())
         }
         return true
     },
 
-    collisionStarBegin: function(arbiters) {
-        cc.log("CollisionStarBegin")
+    collisionYellowStarBegin: function(arbiters) {
+        this.collisionStarBegin(arbiters, rss.spaceship.powerUps[rss.tag.yellowStar])
+    },
+
+    collisionRedStarBegin: function(arbiters) {
+        this.collisionStarBegin(arbiters, rss.spaceship.powerUps[rss.tag.redStar])
+    },
+
+    collisionPurpleStarBegin: function(arbiters) {
+        this.collisionStarBegin(arbiters, rss.spaceship.powerUps[rss.tag.purpleStar])
+    },
+
+    collisionStarBegin: function(arbiters, powerUp) {
+        //cc.log("CollisionStarBegin")
         var that = this
         var gameLayer = this.getChildByTag(rss.tag.gameLayer)
         var shape = arbiters.getShapes()[1]
-        cc.audioEngine.playEffect(rss.res.star_wav)
+
         gameLayer.getChildren().forEach(function(child) {
             if (((typeof child.getShape) != "undefined") && (child.getShape() == shape)) {
                 that.addObjectToRemove(child)
+                powerUpType = child.r.powerUpType
             }
         })
+        gameLayer.getPlayer().incFuel(powerUp)
     },
     
     addObjectToRemove: function(obj) {
@@ -2801,70 +2838,48 @@ var GameScene = rss.BaseScene.extend({
 })
 var GameOverScene = rss.BaseScene.extend({
     onEnter:function () {
-        cc.log("MenuScene.onEnter ...")
+        //cc.log("MenuScene.onEnter ...")
         this._super();
 
         this.addChild(GameOverLayer.create());
     }
 });
 
-/**
- * A brief explanation for "project.json":
- * Here is the content of project.json file, this is the global configuration for your game, you can modify it to customize some behavior.
- * The detail of each field is under it.
- {
-    "project_type": "javascript",
-    // "project_type" indicate the program language of your project, you can ignore this field
+rss.ui = {}
 
-    "debugMode"     : 1,
-    // "debugMode" possible values :
-    //      0 - No message will be printed.
-    //      1 - cc.error, cc.assert, cc.warn, cc.log will print in console.
-    //      2 - cc.error, cc.assert, cc.warn will print in console.
-    //      3 - cc.error, cc.assert will print in console.
-    //      4 - cc.error, cc.assert, cc.warn, cc.log will print on canvas, available only on web.
-    //      5 - cc.error, cc.assert, cc.warn will print on canvas, available only on web.
-    //      6 - cc.error, cc.assert will print on canvas, available only on web.
+rss.ui.linewidth = 2
 
-    "showFPS"       : true,
-    // Left bottom corner fps information will show when "showFPS" equals true, otherwise it will be hide.
+rss.ui.button = function(sprites) {
+    var btn = new CompositeSprite(["#button_outer.png", sprites[0], sprites[1]])
+    btn.setColor(rss.colors.white)
+    btn.setChildColor(0, rss.colors.black)
+    btn.setChildColor(1, rss.colors.white)
+    return btn
+}
 
-    "frameRate"     : 60,
-    // "frameRate" set the wanted frame rate for your game, but the real fps depends on your game implementation and the running environment.
+rss.ui.buttons = function(sprites) {
+    var buttons = {
+        normal: rss.ui.button(sprites[0]),
+        selected: rss.ui.button(sprites[1])
+    }
 
-    "id"            : "gameCanvas",
-    // "gameCanvas" sets the id of your canvas element on the web page, it's useful only on web.
+    return buttons
+}
 
-    "renderMode"    : 0,
-    // "renderMode" sets the renderer type, only useful on web :
-    //      0 - Automatically chosen by engine
-    //      1 - Forced to use canvas renderer
-    //      2 - Forced to use WebGL renderer, but this will be ignored on mobile browsers
+rss.ui.restartButton = function() {
+    return rss.ui.buttons(
+        [
+            ["button_n_inner.png", "restart_n_text.png"],
+            ["button_s_inner.png", "restart_s_text.png"]
+        ]
+    )
+}
 
-    "engineDir"     : "frameworks/cocos2d-html5/",
-    // In debug mode, if you use the whole engine to develop your game, you should specify its relative path with "engineDir",
-    // but if you are using a single engine file, you can ignore it.
-
-    "modules"       : ["cocos2d"],
-    // "modules" defines which modules you will need in your game, it's useful only on web,
-    // using this can greatly reduce your game's resource size, and the cocos console tool can package your game with only the modules you set.
-    // For details about modules definitions, you can refer to "../../frameworks/cocos2d-html5/modulesConfig.json".
-
-    "jsList"        : [
-    ]
-    // "jsList" sets the list of js files in your game.
- }
- *
- */
-
-cc.game.onStart = function(){
-    cc.view.adjustViewPort(true);
-    cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
-    cc.view.resizeWithBrowserSize(true);
-    //load resources
-    cc.LoaderScene.preload(rss.resources, function () {
-        //cc.director.runScene(new MenuScene());
-        cc.director.runScene(new GameScene());
-    }, this);
-};
-cc.game.run();
+rss.ui.startButton = function() {
+    return rss.ui.buttons(
+        [
+            ["button_n_inner.png", "start_n_text.png"],
+            ["button_s_inner.png", "start_s_text.png"]
+        ]
+    )
+}
