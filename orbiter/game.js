@@ -1,5 +1,3 @@
-cc.log("LOADED")
-
 var rss = rss || {};
 
 rss.chipmunk = "chipmunk"
@@ -501,8 +499,9 @@ rss.res = {
     spritesheet_plist: "res/spritesheet.plist",
     spritesheet_png: "res/spritesheet.png",
 
+    background_ogg: "res/techno_revenge.ogg",
     star_wav: "res/star.wav",
-    spaceship_ogg: "res/delta_iv.ogg",
+    spaceship_ogg: "res/delta_iv_short.ogg",
     refuel_wav: "res/refuel.wav"
 }
 
@@ -1644,13 +1643,19 @@ rss.Spaceship = rss.RectPhysicsSprite.extend({
                 this.applyImpulse(cp.v(0, Math.min(this.getMass() * rss.spaceship.acc * dt, rss.spaceship.maxImp)))
                 this.decFuel()
                 this.r.sprite.setSpriteFrame(this.r.upFrame)
-                cc.audioEngine.playMusic(rss.res.spaceship_ogg)
+                if (!this.r.wasUpInput) {
+                    this.r.rocketEffect = cc.audioEngine.playEffect(rss.res.spaceship_ogg, true)
+                }
             }
+            this.r.wasUpInput = true
+        }
+        else if (this.r.wasUpInput) {
+            this.r.wasUpInput = false
+            cc.audioEngine.stopEffect(this.r.rocketEffect)
         }
         else {
             rss.spaceship.acc = 1000
             this.r.sprite.setSpriteFrame(this.r.downFrame)
-            cc.audioEngine.stopMusic()
         }
 
         this.setAngle(0)
@@ -2659,7 +2664,7 @@ var GameScene = rss.BaseScene.extend({
         this.addChild(StatsLayer.create(), 0, rss.tag.statsLayer)
 
         cc.audioEngine.setMusicVolume(1)
-        cc.audioEngine.setEffectsVolume(0.5)
+        cc.audioEngine.setEffectsVolume(0.2)
         this.scheduleUpdate();
     },
     
@@ -2770,6 +2775,7 @@ var GameScene = rss.BaseScene.extend({
         if ((rss.game.state == rss.game.states.touched) || (rss.game.state == rss.game.states.started)) {
             rss.player.state = rss.player.states.flying
             rss.world.state = rss.world.states.moving
+            cc.audioEngine.playMusic(rss.res.background_ogg)
         }
     },
 
