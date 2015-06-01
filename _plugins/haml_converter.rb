@@ -14,7 +14,6 @@ module Jekyll
 
     def convert(content)
       print "RUNNING HAML -> HTML CONVERSION"
-      system("touch robin_was_here")
       engine = Haml::Engine.new(content)
       engine.render
     end
