@@ -7,5 +7,9 @@
     "gulp-sass": "",
     "gulp-autoprefixer": "",
     "browser-sync": ""
+  },
+  "devDependencies": {
+    "gulp-haml": "~0.1.5",
+    "gulp-ruby-haml": "0.0.4"
   }
 }

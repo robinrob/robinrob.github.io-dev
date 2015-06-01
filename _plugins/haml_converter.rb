@@ -13,7 +13,6 @@ module Jekyll
     end
 
     def convert(content)
-      print "RUNNING HAML -> HTML CONVERSION"
       engine = Haml::Engine.new(content)
       engine.render
     end
