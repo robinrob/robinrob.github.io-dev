@@ -13,7 +13,7 @@ var messages = {
 /**
  * Build the Jekyll Site
  */
-gulp.task('jekyll-build', ['haml'], function (done) {
+gulp.task('jekyll-build', function (done) {
     browserSync.notify(messages.jekyllBuild);
     return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
         .on('close', done);
@@ -54,11 +54,11 @@ gulp.task('sass', function () {
 });
 
 gulp.task('haml', function () {
-    var locations = ['.', '_layouts/haml', '_includes/haml', 'cv/haml']
+    var locations = ['.', '_layouts', '_includes', 'cv']
 
     locations.forEach(function(location) {
         console.log("Converting HAML to HTML in: " + location)
-        gulp.src(['*.haml'], {read:false})
+        gulp.src([location + '/haml/*.haml', location + '/*.haml'])
             .pipe(haml())
             .pipe(gulp.dest(location));
     })
@@ -68,7 +68,8 @@ gulp.task('haml', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch(['*.haml', '_layouts/haml/*', '_includes/haml/*', 'cv/haml/*', '_posts/*', 'css/*', '_sass/*', 'img/*', 'orbiter/**/*'], ['jekyll-rebuild']);
+    gulp.watch(['*.haml', '_layouts/haml/*', '_includes/haml/*', 'cv/haml/*'], ['haml']);
+    gulp.watch(['_layouts/*', '_includes/*', '*.html', '_posts/*', 'css/*', '_sass/*', 'img/*', 'orbiter/**/*'], ['jekyll-rebuild']);
 });
 
 /**
