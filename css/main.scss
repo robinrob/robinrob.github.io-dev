@@ -52,9 +52,8 @@ $header-border-col2: #0f0f0f;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "css_reset",
+        "theme",
         "cv",
-        "base",
-        "layout",
-        "syntax-highlighting",
-        "theme"
+        "front_page",
+        "syntax-highlighting"
 ;
