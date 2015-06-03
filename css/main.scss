@@ -30,6 +30,9 @@ $on-palm:          600px;
 $on-laptop:        800px;
 $left-margin:      0px;
 
+$header-border-width: 20px;
+$header-border-col1: #000000;
+$header-border-col2: #0f0f0f;
 
 
 // Using media queries with like this:
@@ -48,6 +51,7 @@ $left-margin:      0px;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
+        "css_reset",
         "cv",
         "base",
         "layout",

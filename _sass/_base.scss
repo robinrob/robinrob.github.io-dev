@@ -206,3 +206,16 @@ pre {
 body {
     margin-left: -200px;
 }
+
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1; /* for IE6 and IE7 */
+}

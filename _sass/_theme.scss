@@ -127,7 +127,6 @@ hr.small {
   }
 }
 .intro-header {
-  background-color: #808080;
   background: no-repeat center center;
   background-attachment: scroll;
   -webkit-background-size: cover;
@@ -142,6 +141,27 @@ hr.small {
   padding: 100px 0 50px;
   color: white;
 }
+
+.site-heading {
+  background-image: linear-gradient(45deg, #bbbbbb, #4e4e4e);
+  border-width: 0 0 0 0;
+  border-style: solid;
+  border-left-width: $header-border-width;
+  border-top-width: $header-border-width;
+  border-image: linear-gradient(to bottom, $header-border-col1, $header-border-col2) 1 100%;
+}
+
+.header-border-top {
+  height: $header-border-width;
+}
+
+.header-border-left {
+  background-image: linear-gradient(45deg, $header-border-col1, $header-border-col2);
+  width: $header-border-width;
+  height: 340px;
+  align: left;
+}
+
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
@@ -152,7 +172,7 @@ hr.small {
 
 .intro-header .site-heading,
 .intro-header .page-heading {
-  text-align: center;
+  text-align: left;
 }
 .intro-header .site-heading h1,
 .intro-header .page-heading h1 {
