@@ -1,0 +1,37 @@
+.box {
+    width: 200px;
+    height: 200px;
+    background: blue;
+}
+.card {
+    width: 600px;
+}
+
+.title, .subtitle {
+    font-family: Cookie;
+}
+
+.title {
+    font-size: 80px;
+}
+
+.photo {
+    margin-right: 75px;
+    float: right;
+    border: 2px groove grey;
+    box-shadow: 1px 1px 10px 0px black;
+    transition: box-shadow .05s ease-out;
+}
+
+.photo:hover {
+    box-shadow: 2px 2px 20px 2px #202020;
+}
+
+.subtitle {
+    font-size: 45px;
+}
+
+.photo {
+    width: 100px;
+    height: 100px;
+}

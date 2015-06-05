@@ -1,8 +1,9 @@
-%body
-  %header.intro-header
-    .container
-      .row
-        .site-heading
-          %h1 {{ site.title }}
-          %hr.small/
-          %span.subheading {{ site.subtitle }}
+%header
+  .container
+    .row
+      .col-lg-10.col-lg-offset-2.col-xs-12
+        .card
+          .title
+            {{ site.title }}
+            %img.photo{:src => "/img/me.png"}
+          .subtitle {{ site.subtitle }}

@@ -69,7 +69,7 @@ gulp.task('haml', function () {
  */
 gulp.task('watch', function () {
     gulp.watch(['*.haml', '_layouts/haml/*', '_includes/haml/*', 'cv/haml/*'], ['haml']);
-    gulp.watch(['_layouts/*', '_includes/*', '*.html', '_posts/*', 'css/*', '_sass/*', 'img/*', 'orbiter/**/*'], ['jekyll-rebuild']);
+    gulp.watch(['_layouts/*', '_includes/*', '*.html', '_posts/*', 'css/*', '_sass/*', 'img/*', 'js/*', 'orbiter/**/*'], ['jekyll-rebuild']);
 });
 
 /**
