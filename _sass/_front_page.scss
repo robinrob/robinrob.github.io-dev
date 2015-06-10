@@ -5,7 +5,7 @@
 }
 .card {
     width: 600px;
-    display: inline-block;
+//    display: inline-block;
 }
 
 .title, .subtitle {
@@ -23,7 +23,7 @@
 
 .photo {
     float: right;
-//    margin-left: 50px;
+    margin-left: 50px;
     border: 2px groove grey;
     box-shadow: 1px 1px 10px 0px black;
     transition: box-shadow .05s ease-out;

@@ -11,9 +11,9 @@ var watch       = require('gulp-watch')
 var changed     = require('gulp-changed')
 var ngmin       = require('gulp-ngmin')
 var task        = require('gulp-task')
-var runsequence        = require('run-sequence')
-//var jekyll      = require('gulp-jekyll')
-require('shelljs/global')
+var runsequence = require('run-sequence')
+var shell       = require('shelljs/global')
+var path        = require('path')
 
 
 var messages = {
@@ -22,24 +22,13 @@ var messages = {
 
 function onError(err) {
     console.log(err)
-    exec("say wanker")
+    shell.exec("say wanker")
 }
-
 
 gulp.task('jekyll-build', function(done) {
     browserSync.notify(messages.jekyllBuild)
     return cp.spawn('jekyll', ['build'], {stdio: 'inherit'}).on('close', done);
 })
-
-//gulp.task('jekyll-build', function () {
-//    gulp.src(['./index.html', './_layouts/*.html', './_includes/*.html', './_posts/*.{markdown,md}'])
-//        .pipe(jekyll({
-//            source: './',
-//            destination: './_site/',
-//            bundleExec: true
-//        }))
-//        .pipe(gulp.dest('./_site/'));
-//});
 
 /**
  * Rebuild Jekyll & do page reload
@@ -74,26 +63,9 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('css'));
 });
 
-// Watch for changes in Haml files
-//gulp.task('haml-watch', function() {
-//
-//    locations.forEach(function(location) {
-        //var location = '_includes'
-        //var src = location + '/haml/*.haml'
-        //var dest = location
-        //console.log("src: " + src)
-    //return gulp.src(src).
-    //        pipe(plumber({
-    //            onError: onError
-    //        })).
-    //        pipe(watch(src)).
-    //        pipe(changed(dest, {extension: '.html'})).
-    //        pipe(haml()).
-    //        pipe(gulp.dest(dest))
-//})
-
 gulp.task('haml-watch', function() {
-    var locations = ['/Users/msl/Programming/robin/ruby/projects/robinrob.github.io-dev', '_includes', '_layouts', 'cv']
+    var here = path.resolve('./')
+    var locations = [here, '_includes', '_layouts', 'cv']
     locations.forEach(function(location) {
         var src = location + '/haml/*.haml'
         var dest = location
@@ -111,24 +83,6 @@ gulp.task('haml-watch', function() {
             }))
     })
 })
-
-// Watch for changes in Haml files
-//gulp.task('haml-watch', function() {
-//    var dest = '.'
-//    gulp.src('./*.haml').
-//        pipe(plumber({
-//            onError: onError
-//        })).
-//        pipe(watch('./*.haml')).
-//        pipe(changed(dest, {extension: '.html'})).
-//        pipe(haml()).
-//        pipe(gulp.dest(dest)).
-//        pipe(gcallback(reload))
-//})
-
-
-// gulp.task('reload', function() {
-
 
 /**
  * Watch scss files for changes & recompile
