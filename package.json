@@ -15,6 +15,11 @@
     "gulp-changed": "~1.2.1",
     "gulp-plumber": "~1.0.1",
     "shelljs": "~0.5.1",
-    "gulp-watch": "~4.2.4"
+    "gulp-watch": "~4.2.4",
+    "gulp-jekyll": "0.0.0",
+    "gulp-ngmin": "~0.3.0",
+    "gulp-task": "~2.0.2",
+    "gulp-sequence": "~0.3.2",
+    "run-sequence": "~1.1.0"
   }
 }
