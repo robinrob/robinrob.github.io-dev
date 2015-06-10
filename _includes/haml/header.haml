@@ -2,8 +2,10 @@
   .container
     .row
       .col-lg-10.col-lg-offset-2.col-md-10.col-md-offset-2
-        .card
+        .front-page-card
           .title
             {{ site.title }}
             %img.photo{:src => "/img/me.png"}
           .subtitle {{ site.subtitle }}
+          .email
+            %a{:href => "mailto:{{ site.email }}"} {{ site.email }}

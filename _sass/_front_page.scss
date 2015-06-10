@@ -11,7 +11,7 @@ html, body, header, footer {
     height: 200px;
     background: blue;
 }
-.card {
+.front-page-card {
     width: 600px;
 }
 
@@ -30,6 +30,15 @@ html, body, header, footer {
     font-size: 45px;
 }
 
+.email {
+    font-size: 20px;
+    text-align: center
+}
+
+.email > a {
+
+}
+
 .photo {
     width: $image-height;
     height: $image-height;
@@ -45,3 +54,11 @@ html, body, header, footer {
     box-shadow: 2px 2px 20px 2px #202020;
 }
 
+.front-page-main {
+}
+
+.skills {
+}
+
+.services {
+}
