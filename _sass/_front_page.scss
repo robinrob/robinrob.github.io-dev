@@ -9,15 +9,20 @@
 
 .title, .subtitle {
     font-family: Cookie;
+    float: left;
 }
 
 .title {
     font-size: 80px;
 }
 
+.subtitle {
+    font-size: 45px;
+}
+
 .photo {
-    margin-right: 75px;
     float: right;
+    margin-left: 50px;
     border: 2px groove grey;
     box-shadow: 1px 1px 10px 0px black;
     transition: box-shadow .05s ease-out;
@@ -27,9 +32,6 @@
     box-shadow: 2px 2px 20px 2px #202020;
 }
 
-.subtitle {
-    font-size: 45px;
-}
 
 .photo {
     width: 100px;
