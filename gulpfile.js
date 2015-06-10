@@ -64,9 +64,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('haml-watch', function() {
-    //var here = path.resolve('./') - destination of '.' in gulp.dest() means relative to src!
-    // Actually, just going to use an index/ and maintenance/ folders, solves the problem easily!
-    var locations = ['index', 'maintenance', '_includes', '_layouts', 'cv']
+    // destination of '.' in gulp.dest() means relative to src!
+    var here = path.resolve('./')
+    var locations = [here, '_includes', '_layouts', 'cv']
     locations.forEach(function(location) {
         var src = location + '/haml/*.haml'
         var dest = location
