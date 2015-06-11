@@ -11,7 +11,9 @@ exclude: [node_modules]
 baseurl: "/robinrob.github.io-dev/" # the subpath of your site, e.g. /blog/
 #baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://robinrob.github.io" # the base hostname & protocol for your site
-github_username:  robinrob
+github: robinrob
+twitter:
+facebook: robin.smith.50364591
 
 # Build settings
 markdown: kramdown
