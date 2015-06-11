@@ -3,10 +3,6 @@
 ---
 @charset "utf-8";
 
-
-{% include bootstrap.min.scss %}
-
-
 // Our variables
 $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
@@ -54,7 +50,8 @@ $front-page-main-margin: 100px;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
+        "bootstrap",
         "base",
-        "front_page",
+        "front-page",
         "syntax-highlighting"
 ;

@@ -19,3 +19,6 @@ author: Robin Smith
 
 # Allow /index route in place of /index.html etc
 permalink: pretty
+
+sass:
+    sass_dir: _sass
