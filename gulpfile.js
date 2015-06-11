@@ -90,7 +90,7 @@ gulp.task('haml-watch', function() {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch(['_config.yml', '_posts/*', 'img/*', '_sass/*.scss', 'css/main.scss', 'js/*', 'orbiter/**/*'], ['jekyll-rebuild']);
+    gulp.watch(['_config.yml', '_posts/*', 'img/*', '_sass/*.scss', 'css/*/**.scss', 'js/*', 'orbiter/**/*'], ['jekyll-rebuild']);
 });
 
 /**
