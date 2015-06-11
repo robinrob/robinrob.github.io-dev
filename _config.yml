@@ -22,3 +22,7 @@ permalink: pretty
 
 sass:
     sass_dir: _sass
+
+assets:
+    sources:
+      - fonts
