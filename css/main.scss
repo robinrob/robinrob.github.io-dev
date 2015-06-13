@@ -51,6 +51,7 @@ $front-page-main-margin: 100px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
+        "theme",
         "front-page",
         "syntax-highlighting"
 ;

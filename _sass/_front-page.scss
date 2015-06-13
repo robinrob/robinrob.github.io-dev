@@ -11,32 +11,32 @@
     height: 200px;
     background: blue;
 }
+
 .front-page-card {
-    width: 600px;
+    width: 700px;
 }
 
 .title, .subtitle {
-    font-family: 'Font Awesome';
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
     float: left;
 }
 
 .title {
     display: inline-block;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 .subtitle {
+    margin-top: 30px;
     display: inline-block;
-    font-size: 45px;
+    font-size: 30px;
 }
 
 .email {
     font-size: 20px;
-    text-align: center
-}
-
-.email > a {
-
+    text-align: center;
+    margin-top: 20px;
 }
 
 .photo {
