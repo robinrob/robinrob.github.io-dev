@@ -6,47 +6,19 @@
 //    background: blue;
 //}
 
-header {
-    margin-top: 100px;
-}
-.box {
-    width: 200px;
-    height: 200px;
-    background: blue;
-}
-
-.front-page-card {
-    width: 700px;
-}
-
-.title, .subtitle {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 800;
-    float: left;
-}
-
-.title {
-    display: inline-block;
-    font-size: 80px;
-}
-
-.subtitle {
-    margin-top: 10px;
-    display: inline-block;
-    font-size: 30px;
-}
-
 .email {
+    margin-top: 20px;
     font-size: 20px;
     text-align: center;
 }
 
 .photo {
+    display: inline-block;
+    text-align: center;
     width: $image-height;
     height: $image-height;
-    float: right;
-    margin-top: 20px;
-    margin-left: 50px;
+    background-size: cover;
+    background-image: url("../img/me.png");
     border: 2px groove grey;
     box-shadow: 1px 1px 10px 0px black;
     transition: box-shadow .05s ease-out;

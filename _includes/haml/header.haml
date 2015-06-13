@@ -1,13 +1,15 @@
 %header.intro-header{:style => "background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')"}
   .container
-    .row
-      .col-lg-10.col-lg-offset-2.col-md-10.col-md-offset-2
-        .front-page-card
-          .titles
-            .title
-              {{ site.title }}
-              %img.photo{:src => "img/me.png"}
-              %hr.small
-            .subtitle {{ site.subtitle }}
-            .email
-              %a{:href => "mailto:{{ site.email }}"} {{ site.email }}
+    .site-heading
+      .row
+        .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
+          %h1 {{ site.title }}
+      .row
+        .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
+          .photo
+      .row
+        .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
+          %hr.small
+          %span.subheading {{ site.subtitle }}
+          .email
+            %a{:href => "mailto:{{ site.email }}"} {{ site.email }}
