@@ -1,7 +1,7 @@
 $(function () {
-    $(".accordion").accordion({
-        heading: "h2",
-        paragraph: ".container",
-        duration: 200
-    })
+    //$(".accordion").accordion({
+    //    heading: "h2",
+    //    paragraph: ".container",
+    //    duration: 200
+    //})
 })
