@@ -1,16 +1,18 @@
-<header>
+<header class='intro-header' style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
   <div class='container'>
     <div class='row'>
       <div class='col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2'>
         <div class='front-page-card'>
-          <div class='title'>
-            {{ site.title }}
-            <img class='photo' src='img/me.png'>
-          </div>
-          <hr class='small'>
-          <div class='subtitle'>{{ site.subtitle }}</div>
-          <div class='email'>
-            <a href='mailto:{{ site.email }}'>{{ site.email }}</a>
+          <div class='titles'>
+            <div class='title'>
+              {{ site.title }}
+              <img class='photo' src='img/me.png'>
+              <hr class='small'>
+            </div>
+            <div class='subtitle'>{{ site.subtitle }}</div>
+            <div class='email'>
+              <a href='mailto:{{ site.email }}'>{{ site.email }}</a>
+            </div>
           </div>
         </div>
       </div>

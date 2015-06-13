@@ -1,11 +1,11 @@
 !!!
 %html
   {% include head.html %}
-  {% include header.html %}
 
   %body
-    .page-content
-      .wrapper
-        {{ content }}
+  {% include nav.html %}
+  {% include header.html %}
+    .wrapper
+      {{ content }}
 
 {% include footer.html %}
