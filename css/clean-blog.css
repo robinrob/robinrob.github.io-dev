@@ -18,6 +18,7 @@ html h5,
 html h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
+  color: black;
 }
 html a,
 html a:visited {
