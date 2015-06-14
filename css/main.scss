@@ -33,6 +33,12 @@ $header-border-col2: #0f0f0f;
 $image-height: 120px;
 $front-page-main-margin: 100px;
 
+$brand-primary: #0085A1;
+$gray-dark: lighten(black, 25%);
+$gray: lighten(black, 50%);
+$white-faded: fade(white, 80%);
+$gray-light: #eee;
+
 
 // Using media queries with like this:
 // @include media-query($on-palm) {
@@ -51,6 +57,7 @@ $front-page-main-margin: 100px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
+        "clean-blog",
         "front-page",
         "syntax-highlighting"
 ;
