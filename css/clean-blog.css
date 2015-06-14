@@ -10,16 +10,17 @@ p {
 p a {
   text-decoration: underline;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
 }
-a, a:visited {
+html a,
+html a:visited {
   color: #404040;
 }
 a:hover,
