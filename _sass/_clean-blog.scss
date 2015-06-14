@@ -385,7 +385,7 @@ form .row:first-child .floating-label-form-group {
   &:focus {
     background-color: $brand-primary;
     border: 1px solid $brand-primary;
-    color: white;
+    color: black;
 }
 }
 
@@ -404,7 +404,7 @@ form .row:first-child .floating-label-form-group {
       font-weight: 800;
       letter-spacing: 1px;
       padding: 10px 5px;
-      background-color: white;
+      background-color: black;
       border-radius: 0;
       @media only screen and (min-width: 768px) {
       font-size: 14px;
@@ -414,7 +414,7 @@ form .row:first-child .floating-label-form-group {
 
     > a:hover,
     > a:focus {
-      color: white;
+      color: black;
       background-color: $brand-primary;
       border: 1px solid $brand-primary;
   }
