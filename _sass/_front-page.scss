@@ -6,18 +6,14 @@
 //    background: blue;
 //}
 
-html h1,
-html h2,
-html h3,
-html h4,
-html h5,
-html h6 {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 800;
-    color: black;
+.site-heading h1 {
+    color: $brand-header;
 }
 
 .email {
+    a {
+        color: $brand-header;
+    }
     margin-top: 20px;
     font-size: 20px;
     text-align: center;
@@ -31,8 +27,8 @@ html h6 {
     background-size: cover;
     background-image: url("../img/me.png");
     border-radius: $image-height / 2;
-    border: 2px groove grey;
-    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.75);
+    border: 2px groove $brand-header;
+    box-shadow: 1px 1px 5px 0px $brand-header;
     //transition: box-shadow 1s ease-out;
 }
 
