@@ -4,7 +4,7 @@
 body {
     @include serif();
     font-size: 20px;
-    color: $gray-dark;
+    color: $brand-dark;
 }
 
 // -- Typography
@@ -25,13 +25,13 @@ h5,
 h6 {
     @include sans-serif();
     font-weight: 800;
+    color: $brand-dark;
 }
 
 a {
-    color: $gray-dark;
+    color: $brand-dark;
     &:hover,
-    &:focus,
-    &:visited {
+    &:focus, {
         color: $brand-primary;
     }
 }
@@ -44,7 +44,7 @@ a img {
 }
 
 blockquote {
-    color: $gray;
+    color: $white;
     font-style: italic;
 }
 
@@ -52,7 +52,7 @@ hr.small {
     max-width: 100px;
     margin: 15px auto;
     border-width: 4px;
-    border-color: $brand-header;
+    border-color: $brand-light;
 }
 
 .navbar-collapse {
@@ -96,7 +96,7 @@ hr.small {
         background: transparent;
         border-bottom: 1px solid transparent;
         .navbar-brand {
-            color: $brand-header;
+            color: $brand-light;
             padding: 20px;
             &:hover,
             &:focus {
@@ -106,7 +106,7 @@ hr.small {
         .nav {
             li {
                 a {
-                    color: $brand-header;
+                    color: $brand-light;
                     padding: 20px;
                     &:hover,
                     &:focus {
@@ -138,7 +138,7 @@ hr.small {
             -moz-transition: -moz-transform 0.3s;
             transition: transform 0.3s;
             .navbar-brand {
-                color: $gray-dark;
+                color: $brand-dark;
                 &:hover,
                 &:focus {
                     color: $brand-primary;
@@ -147,7 +147,7 @@ hr.small {
             .nav {
                 li {
                     a {
-                        color: $gray-dark;
+                        color: $brand-dark;
                         &:hover,
                         &:focus {
                             color: $brand-primary;
@@ -171,7 +171,7 @@ hr.small {
 
 .intro-header {
     background: no-repeat center center;
-    background-color: $gray;
+    background-color: $white;
     background-attachment: scroll;
     @include background-cover();
     // NOTE: Background images are set within the HTML using inline CSS!
@@ -180,7 +180,7 @@ hr.small {
     .post-heading,
     .page-heading {
         padding: 100px 0 50px;
-        color: $brand-header;
+        color: $brand-light;
         @media only screen and (min-width: 768px) {
             padding: 150px 0;
         }
@@ -227,7 +227,7 @@ hr.small {
             font-weight: 300;
             font-size: 20px;
             a {
-                color: $brand-header;
+                color: $brand-light;
             }
         }
         @media only screen and (min-width: 768px) {
@@ -245,7 +245,7 @@ hr.small {
 
 .post-preview {
     > a {
-        color: $gray-dark;
+        color: $brand-dark;
         &:hover,
         &:focus {
             text-decoration: none;
@@ -263,13 +263,13 @@ hr.small {
         }
     }
     > .post-meta {
-        color: $gray;
+        color: $white;
         font-size: 18px;
         font-style: italic;
         margin-top: 0;
         > a {
             text-decoration: none;
-            color: $gray-dark;
+            color: $brand-dark;
             &:hover,
             &:focus {
                 color: $brand-primary;
@@ -316,8 +316,16 @@ footer {
         text-align: center;
         margin-bottom: 0;
     }
+    a,
+    a:active,
     a:visited {
-        color: black;
+        color: $brand-dark;
+    }
+    a:visited:hover {
+        color: $brand-primary;
+    }
+    a:hover {
+        color: $brand-primary;
     }
 }
 
@@ -443,8 +451,8 @@ form .row:first-child .floating-label-form-group {
         > a:hover,
         > a:focus,
         > span {
-            color: $gray;
-            background-color: $gray-dark;
+            color: $white;
+            background-color: $brand-dark;
             cursor: not-allowed;
         }
     }

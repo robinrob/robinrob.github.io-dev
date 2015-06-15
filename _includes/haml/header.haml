@@ -6,7 +6,7 @@
           %h1 {{ site.title }}
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
-          .photo
+          %a.photo{:href => "mailto:{{ site.email }}"}
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
           %hr.small
