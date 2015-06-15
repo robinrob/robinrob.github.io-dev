@@ -46,15 +46,6 @@
     //            inset -2px -2px 10px 1px rgba(0, 0, 0, 0.20),
 }
 
-.front-page {
-}
-
-body .title span {
-    margin: 0px !important;
-    padding: 0px !important;
-    letter-spacing: 1px;
-}
-
 @for $i from 1 through 11  {
     .fadein#{$i} {
             -webkit-animation: fadein $title-fadein-base + $i * $title-fadein-step
