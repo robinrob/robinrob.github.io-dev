@@ -3,9 +3,15 @@
     <div class='site-heading'>
       <div class='row'>
         <div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1'>
-          <h1>{{ site.title }}</h1>
+          <h1 class='title'>
+            {% assign array = "R|o|b|i|n|&nbsp|S|m|i|t|h" | split: "|" %}
+            {% for item in array %}
+            <span class=".h1 fadein{{ forloop.index }}">{{ item }}</span>
+            {% endfor %}
+          </h1>
         </div>
       </div>
+      <div class='row'></div>
       <div class='row'>
         <div class='col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1'>
           <a class='photo' href='mailto:{{ site.email }}'></a>
