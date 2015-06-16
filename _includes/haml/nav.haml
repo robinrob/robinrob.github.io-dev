@@ -13,6 +13,8 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
+          -# How to do inline stuff
+          -#%span!= "<span class=\"bracket\">{</span><a href=\"{{ site.baseurl }}/index.html\">Home</a><span class=\"bracket\">}</span>"
           %a{:href => "{{ site.baseurl }}/index.html"} Home
         %li
           %a{:href => "{{ site.baseurl }}/cv"} CV

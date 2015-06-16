@@ -6,14 +6,14 @@
           %h1.title
             == {% assign array = "R|o|b|i|n|&nbsp|S|m|i|t|h" | split: "|" %}
             == {% for item in array %}<span class="fadein{{ forloop.index }}">{{ item }}</span>{% endfor %}
-
-      .row
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
-          %a.photo{:href => "mailto:{{ site.email }}"}
+          .photo{:href => "mailto:{{ site.email }}"}
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
           %hr.small
           %span.subheading {{ site.subtitle }}
           .email
             %a{:href => "mailto:{{ site.email }}"} {{ site.email }}
+
+  .macbook
