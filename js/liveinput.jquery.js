@@ -26,28 +26,27 @@
             audio.play();
         }
 
-        function writeText(text, cursorElement, callback) {
-            var chars = text.split("")
-            chars.forEach(function (char, index) {
-                setTimeout(function () {
-                        writeChar(char, cursorElement)
-                        keyPress()
-                    }, index * 200 + Math.random() * 200)
-
-                if (index == chars.length - 1) {
-                    setTimeout(function () {
-                        callback()
-                    }, index * 200 + 200)
-                }
-            })
-        }
-
         function writeChar(char, cursorElement) {
             var $char = $("<span />", {
                 html: char,
                 class: "char"
             });
             $($char).insertBefore(cursorElement)
+            keyPress()
+        }
+
+        function writeText(text, cursorElement, callback) {
+            var char = text.substr(0, 1)
+            text = text.slice(1)
+            writeChar(char, cursorElement)
+            if (text.length == 0) {
+                callback()
+            }
+            else if (text.length > 0) {
+                setTimeout(function() {
+                    writeText(text, cursorElement, callback)
+                }, 200 + Math.random() * 200)
+            }
         }
 
         function isValidChar(char) {
