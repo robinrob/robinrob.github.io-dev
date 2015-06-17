@@ -6,6 +6,20 @@
 //    background: blue;
 //}
 
+header h1 {
+    margin-left: 1em;
+}
+.cursor {
+    color: green;
+    margin-left: 0.1em;
+}
+
+.liveinput:focus {
+    outline: none;
+    //border: 1px solid white;
+    //background-color: red;
+}
+
 .site-heading h1 {
     color: $brand-light;
 }
