@@ -35,7 +35,7 @@ $header-border-col1: #000000;
 $header-border-col2: #0f0f0f;
 $header-bg-col1: lighten(black, 20%);
 $header-bg-col2: lighten(black, 10%);
-$header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, $header-bg-col2 80%, $header-bg-col1 100%);
+$header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, $header-bg-col2 80%, $header-bg-col1 100%) !important;
 //$header-bg: no-repeat center center;
 $header-font-col: $brand-light;
 
