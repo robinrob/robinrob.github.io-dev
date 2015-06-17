@@ -5,7 +5,7 @@
             tabindex: -1,
             audioDir: "sounds",
             cursorFadeDuration: 500,
-            writeDelay: 100
+            writeDelay: 150
         }
         var params = $.extend({}, defaults, options)
 
@@ -47,7 +47,7 @@
             else if (text.length > 0) {
                 setTimeout(function() {
                     writeText(text, cursorElement, callback)
-                }, 200 + Math.random() * 200)
+                }, params.writeDelay + Math.random() * params.writeDelay)
             }
         }
 
