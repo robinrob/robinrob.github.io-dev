@@ -3,7 +3,9 @@
         var defaults = {
             text: "<Text>",
             tabindex: -1,
-            audioDir: "sounds"
+            audioDir: "sounds",
+            cursorFadeDuration: 500,
+            writeDelay: 200
         }
         var params = $.extend({}, defaults, options)
 
@@ -60,6 +62,7 @@
 
         return this.each(function () {
             var $this = $(this)
+            var toggleTimer
 
             $this.attr("tabindex", params.tabindex)
 
@@ -70,42 +73,57 @@
             $this.append($cursor)
 
             setTimeout(function () {
-                writeText(params.text, $cursor, function() {
-                    toggleCursor($cursor);
-                })
-            })
+                writeText(params.text, $cursor, fadeOutCursor)
+            }, params.writeDelay)
 
-            function toggleCursor(cursorElement) {
-                var opacity = cursorElement.css("opacity")
-                if ((opacity == 0) && $this.is(":focus")) {
-                    fadeInCursor(cursorElement)
+            function toggleCursor() {
+                var opacity = $cursor.css("opacity")
+                var callback
+                if (opacity == 0) {
+                    fadeInCursor(params.cursorFadeDuration, toggleCursor)
                 }
                 else {
-                    fadeOutCursor(cursorElement)
+                    fadeOutCursor(params.cursorFadeDuration, toggleCursor)
                 }
             }
 
-            function fadeInCursor(cursorElement) {
-                fadeCursor(cursorElement, 1)
+            function fadeInCursor(duration, callback) {
+                fadeCursor(1, duration, callback)
             }
 
-            function fadeOutCursor(cursorElement) {
-                fadeCursor(cursorElement, 0)
+            function fadeOutCursor(duration, callback) {
+                fadeCursor(0, duration, callback)
             }
 
-            function fadeCursor(cursorElement, opacity) {
-                cursorElement.animate({
+            function fadeCursor(opacity, duration, callback) {
+                $cursor.animate(
+                    {
                         opacity: opacity
                     },
                     {
-                        duration: 100,
-                        complete: function () {
-                            setTimeout(function () {
-                                toggleCursor(cursorElement)
-                            }, 500)
-                        }
-                    })
+                        duration: duration,
+                        complete: callback
+                    }
+                )
             }
+
+            function hideCursor(callback) {
+                fadeOutCursor(0, callback)
+            }
+
+            function showCursor(callback) {
+                fadeInCursor(0, callback)
+            }
+
+            $this.on("focusin", function() {
+                keyPress()
+                showCursor(function() {setTimeout(toggleCursor, params.cursorFadeDuration)})
+            })
+
+            $this.on("focusout", function() {
+                $cursor.stop(true)
+                hideCursor()
+            })
 
             $(document.documentElement).on("keydown", function (event) {
                 if ($this.is(":focus") && event.keyCode === 8) { // backspace
