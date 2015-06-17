@@ -5,7 +5,7 @@
             tabindex: -1,
             audioDir: "sounds",
             cursorFadeDuration: 500,
-            writeDelay: 200
+            writeDelay: 100
         }
         var params = $.extend({}, defaults, options)
 
