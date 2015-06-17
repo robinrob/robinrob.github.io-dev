@@ -171,7 +171,8 @@ hr.small {
 
 .intro-header {
     background: no-repeat center center;
-    background-color: $white;
+    background-image: $header-bg-image;
+    //background-color: $header-bg-col;
     background-attachment: scroll;
     @include background-cover();
     // NOTE: Background images are set within the HTML using inline CSS!
