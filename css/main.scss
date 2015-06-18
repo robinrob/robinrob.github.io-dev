@@ -41,8 +41,10 @@ $header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, 
 //$header-bg: no-repeat center center;
 $header-font-col: $brand-light;
 
+$a-hover-color: $brand-red;
+
 $nav-color: $brand-light;
-$nav-hover-color: $brand-red;
+$nav-hover-color: $a-hover-color;
 
 $image-height: 120px;
 $front-page-main-margin: 100px;

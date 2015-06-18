@@ -32,7 +32,7 @@ a {
     color: $brand-dark;
     &:hover,
     &:focus, {
-        color: $brand-primary;
+        color: $a-hover-color;
     }
 }
 
@@ -273,7 +273,7 @@ hr.small {
             color: $brand-dark;
             &:hover,
             &:focus {
-                color: $brand-primary;
+                color: $a-hover-color;
                 text-decoration: underline;
             }
         }
@@ -323,10 +323,10 @@ footer {
         color: $brand-dark;
     }
     a:visited:hover {
-        color: $brand-primary;
+        color: $a-hover-color;
     }
     a:hover {
-        color: $brand-primary;
+        color: $a-hover-color;
     }
 }
 
