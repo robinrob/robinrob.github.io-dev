@@ -25,12 +25,12 @@
         }
 
         function keyPress() {
-            var audio = document.createElement("audio");
-            audio.src = keySound()
-            audio.addEventListener("ended", function () {
-                $(this).remove()
-            }, false);
-            audio.play();
+            var $audio = $("<audio></audio>")
+            $audio.attr("src", keySound())
+            $audio.on("ended", function () {
+                $audio.remove()
+            })
+            $audio.trigger('play')
         }
 
         function writeChar(char, $cursorObj) {
@@ -75,9 +75,15 @@
                 text: "_",
                 class: "cursor"
             });
-            $this.append($cursor)
 
-            play()
+            setTimeout(function () {
+                $this.children(".char, .cursor").remove()
+                $this.append($cursor)
+                writeText(params.text, $cursor, function() {
+                    fadeOutCursor()
+                    params.callback()
+                })
+            }, params.initialDelay)
 
             $this.off()
             $this.on("focusin", function() {
@@ -126,17 +132,6 @@
                     keyPress()
                 }
             });
-
-            // Instance functions
-            function play() {
-                setTimeout(function () {
-                    $cursor.siblings().remove()
-                    writeText(params.text, $cursor, function() {
-                        fadeOutCursor()
-                        params.callback()
-                    })
-                }, params.initialDelay)
-            }
 
             function toggleCursor() {
                 var opacity = $cursor.css("opacity")

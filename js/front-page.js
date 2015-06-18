@@ -2,56 +2,43 @@ $(function () {
     var $title = $("h1.live-input")
     var $subtitle = $(".subheading.live-input")
 
-    $title.liveInput({
-        callback: function() {
-            $subtitle.liveInput({
-                initialDelay: 500,
-                writeDelay: 120
-            })
-        }
-    })
+    function playTitles() {
+        $title.liveInput({
+            writeDelay: 120,
+            callback: function() {
+                $subtitle.liveInput({
+                    initialDelay: 500,
+                    writeDelay: 110
+                })
+            }
+        })
+    }
 
-    var $els =[$title, $subtitle]
-    $els.forEach(function($el) {
-            $el.attr({
-                "data-toggle": "tooltip",
-                //"data-html": true,
-                //title: "<div class=\".tooltip\"><div class=\".tooltip-inner .header-tooltip-box\">Click me to edit</div></div>",
-                //type: "button",
-                animation: true
-            })
+    playTitles()
 
-            $el.tooltip()
+    $(".bstooltip").each(function(index, element) {
+        var $el = $(element)
+        $el.attr({
+            "data-toggle": "tooltip",
+            //"data-html": true,
+            //title: "<div class=\".tooltip\"><div class=\".tooltip-inner .header-tooltip-box\">Click me to edit</div></div>",
+            //type: "button",
+            animation: true
+        })
+
+        $el.tooltip()
     })
-    //$(".bstooltip").each(function(index, element) {
-    //    var $el = $(element)
-    //    $el.attr({
-    //        "data-toggle": "tooltip",
-    //        //"data-html": true,
-    //        //title: "<div class=\".tooltip\"><div class=\".tooltip-inner .header-tooltip-box\">Click me to edit</div></div>",
-    //        //type: "button",
-    //        animation: true
-    //    })
-    //
-    //    $el.tooltip()
-    //})
 
     var $photo = $(".photo")
     $photo.on("click", function() {
-        $title.children().remove()
-        $subtitle.children().remove()
+        $title.children(".char").remove()
+        $subtitle.children(".char").remove()
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i);
         }
-        $title.liveInput({
-            callback: function() {
-                $subtitle.liveInput({
-                    initialDelay: 500,
-                    writeDelay: 120
-                })
-            }
-        })
+
+        playTitles()
     })
 
     //$el = $(".photo")
