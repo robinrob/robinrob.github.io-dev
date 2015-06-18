@@ -19,10 +19,17 @@
               %span.fa-stack.fa-lg
                 %i.fa.fa-circle.fa-stack-2x
                 %i.fa.fa-github.fa-stack-1x.fa-inverse
+          %li
+            %a{:href => "{{ site.linkedin }}", :target => "_blank"}
+              %span.fa-stack.fa-lg
+                %i.fa.fa-circle.fa-stack-2x
+                %i.fa.fa-linkedin.fa-stack-1x.fa-inverse
+
         %p.copyright.text-muted Copyright © {{ site.brand }} 2015
 
 :javascript
   console.clear()
+
 
 / jQuery Core Javascript
 %script{:src => "js/jquery.js"}

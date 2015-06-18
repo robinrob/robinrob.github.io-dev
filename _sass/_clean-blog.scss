@@ -461,16 +461,30 @@ form .row:first-child .floating-label-form-group {
 
 // -- Highlight Color Customization
 
-::-moz-selection {
-    color: white;
+header ::selection,
+nav ::selection {
+    color: $header-select-color;
     text-shadow: none;
-    background: $brand-primary;
+    background: $select-bg-color;
+}
+
+header ::-moz-selection
+nav ::-moz-selection {
+    color: $header-select-color;
+    text-shadow: none;
+    background: $select-bg-color;
+}
+
+::-moz-selection {
+    color: $select-color;
+    text-shadow: none;
+    background: $select-bg-color;
 }
 
 ::selection {
-    color: white;
+    color: $select-color;
     text-shadow: none;
-    background: $brand-primary;
+    background: $select-bg-color;
 }
 
 img::selection {
@@ -484,5 +498,5 @@ img::-moz-selection {
 }
 
 body {
-    webkit-tap-highlight-color: $brand-primary;
+    webkit-tap-highlight-color: $select-bg-color;
 }

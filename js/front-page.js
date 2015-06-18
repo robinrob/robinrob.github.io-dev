@@ -6,17 +6,13 @@ $(function () {
         var $el = $(element)
         $el.attr({
             "data-toggle": "tooltip",
-            //"data-html": true,
-            //title: "<div class=\".tooltip\"><div class=\".tooltip-inner .header-tooltip-box\">Click me to edit</div></div>",
-
-            //type: "button",
             animation: true
         })
         $el.tooltip()
+    })
 
-        $el.on("click", function(event) {
-            $el.siblings(".tooltip").hide()
-        })
+    $title.on("click", function(event) {
+        $title.siblings(".tooltip").hide()
     })
 
     function playTitles() {
