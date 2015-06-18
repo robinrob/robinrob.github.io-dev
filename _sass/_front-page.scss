@@ -5,14 +5,12 @@
 //html, body, header, footer {
 //    background: blue;
 //}
+.row {
+    //background: red !important;
+}
 
 header h1 {
     margin-left: 1em;
-}
-
-.cursor {
-    color: $cursor-color;
-    margin-left: 0.1em;
 }
 
 .live-input:focus {
@@ -25,9 +23,15 @@ header h1 {
     //background-color: red;
 }
 
-.bstooltip + .tooltip > .tooltip-inner,
-{
-    //font-size: 1.5em;
+.bstooltip + .tooltip.top > .tooltip-arrow {
+    border-top-color: $tooltip-arrow-color;
+}
+
+.bstooltip + .tooltip.left > .tooltip-arrow {
+    border-left-color: $tooltip-arrow-color;
+}
+
+.bstooltip + .tooltip > .tooltip-inner {
     background-color: $tooltip-bg-color;
 }
 
@@ -39,12 +43,16 @@ header h1 {
     color: $brand-light;
 }
 
+.subheading.bstooltip + .tooltip {
+    left: -20px !important;
+}
+
 .email {
     a {
         color: $brand-light;
     }
     a:hover {
-        color: $brand-green;
+        color: $brand-red;
     }
     margin-top: 20px;
     font-size: 20px;

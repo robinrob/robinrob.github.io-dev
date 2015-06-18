@@ -14,10 +14,8 @@ $(function () {
         })
         $el.tooltip()
 
-        $el.on("click", function() {
-            $el.siblings(".tooltip").fadeOut({
-                duration: 100
-            })
+        $el.on("click", function(event) {
+            $el.siblings(".tooltip").hide()
         })
     })
 
@@ -37,8 +35,6 @@ $(function () {
 
     var $photo = $(".photo")
     $photo.on("click", function() {
-        $title.children(".char").remove()
-        $subtitle.children(".char").remove()
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i);

@@ -9,12 +9,12 @@
             -#== {% for item in array %}<span class="fadein{{ forloop.index }}">{{ item }}</span>{% endfor %}
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
-          -#.photo.header-bstooltip{:href => "mailto:{{ site.email }}", "data-placement" => "bottom", "data-toggle" => "bstooltip", :title => "I am a Bootstrap button", :type => "button"}
-          %a.photo.bstooltip{:href => "#"}
+          -#%a.photo.bstooltip{:href => "#", :title => "Made using: https://github.com/robinrob/jquery-liveinput", "data-placement" => "left"}
+          %a.photo.bstooltip{:href => "#", :title => "Made using: https://github.com/robinrob/jquery-liveinput", "data-placement" => "left"}
 
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
           %hr.small
-          %span.subheading.live-input.bstooltip{:text => "Freelance web & mobile developer.", :title => "Made using: https://github.com/robinrob/jquery-liveinput", "data-placement" => "top"}
+          %span.subheading.live-input{:text => "Freelance web & mobile developer."}
           .email
             %a{:href => "mailto:{{ site.email }}"} {{ site.email }}
