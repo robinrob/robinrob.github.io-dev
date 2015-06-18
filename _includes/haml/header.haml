@@ -4,17 +4,17 @@
     .site-heading
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
-          %h1.live-input.bstooltip{:text => "Robin Smith", :title => "Click me to edit!", "data-placement" => "top"}
+          %h1.live-input.bstooltip{:text => "Robin Smith", :title => "Click me to edit!"}
             -#== {% assign array = "R|o|b|i|n|&nbsp|S|m|i|t|h" | split: "|" %}
             -#== {% for item in array %}<span class="fadein{{ forloop.index }}">{{ item }}</span>{% endfor %}
       .row
-        .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
+        .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1#wankerfuck
           -#.photo.header-bstooltip{:href => "mailto:{{ site.email }}", "data-placement" => "bottom", "data-toggle" => "bstooltip", :title => "I am a Bootstrap button", :type => "button"}
-          %a.photo{:href => "#"}
+          %a.photo.bstooltip{:href => "#", :title => "Made using: https://github.com/robinrob/jquery-liveinput", "data-placement" => "right"}
 
       .row
         .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1
-          -#%hr.small
-          %span.subheading.live-input.bstooltip{:text => "Freelance web & mobile developer.", :title => "Made using: https://github.com/robinrob/jquery-liveinput", "data-placement" => "bottom"}
+          %hr.small
+          %span.subheading.live-input.bstooltip{:text => "Freelance web & mobile developer."}
           .email
             %a{:href => "mailto:{{ site.email }}"} {{ site.email }}

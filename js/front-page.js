@@ -2,20 +2,6 @@ $(function () {
     var $title = $("h1.live-input")
     var $subtitle = $(".subheading.live-input")
 
-    function playTitles() {
-        $title.liveInput({
-            writeDelay: 120,
-            callback: function() {
-                $subtitle.liveInput({
-                    initialDelay: 500,
-                    writeDelay: 110
-                })
-            }
-        })
-    }
-
-    playTitles()
-
     $(".bstooltip").each(function(index, element) {
         var $el = $(element)
         $el.attr({
@@ -25,9 +11,22 @@ $(function () {
             //type: "button",
             animation: true
         })
-
         $el.tooltip()
     })
+
+    function playTitles() {
+        $title.liveInput({
+            writeDelay: 120,
+            callback: function() {
+                $subtitle.liveInput({
+                    initialDelay: 500,
+                    writeDelay: 110,
+                })
+            }
+        })
+    }
+
+    playTitles()
 
     var $photo = $(".photo")
     $photo.on("click", function() {
