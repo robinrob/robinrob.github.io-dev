@@ -35,6 +35,11 @@ $(function () {
 
     var $photo = $(".photo")
     $photo.on("click", function() {
+        // Although this happens in the query qode - it only
+        // happens when the plugin runs for each element.
+        // We want all elements cleared before start.
+        $title.children(".char").remove()
+        $subtitle.children(".char").remove()
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i);

@@ -88,55 +88,41 @@
                 })
             }, params.initialDelay)
 
-            var handlers = [
-                liveInputFocusIn,
-                liveInputFocusOut,
-                liveInputKeyPress,
-                liveInputKeyUp,
-                liveInputKeyInput
-            ]
-            handlers.forEach(function(handler) {
-                $this.off(handler)
-            })
 
-            var liveInputFocusIn = function() {
+            $this.off("focusin.liveinput focousout.liveinput keydown.liveinput keypress.liveinput keyup.liveinput keyinput.liveinput")
+            $this.on("focusin.liveinput", function() {
                 keyPress()
                 showCursor(function() {setTimeout(toggleCursor, params.cursorFadeDuration)})
-            }
-            $this.on("focusin", liveInputFocusIn)
+            })
 
-            var liveInputFocusOut = function() {
+            $this.on("focusout.liveinput", function() {
                 $cursor.stop(true)
                 hideCursor()
-            }
-            $this.on("focusout", liveInputFocusOut)
+            })
 
-            var liveInputKeyDown = function(event) {
+            $this.on("keydown.liveinput", function liveInputKeyDown(event) {
                 if ($this.is(":focus") && event.keyCode === 8) { // backspace
                     event.type = "keyInput"
                     $(this).trigger(event)
                     event.preventDefault()
                 }
-            }
-            $this.on("keydown", liveInputKeyDown)
+            })
 
-            var liveInputKeyPress = function(event) {
+            $this.on("keypress.liveinput", function liveInputKeyPress(event) {
                 if ($this.is(":focus")) {
                     event.type = "keyInput"
                     $(this).trigger(event)
                     event.preventDefault()
                 }
-            }
-            $this.on("keypress", liveInputKeyPress);
+            });
 
-            var liveInputKeyUp = function(event) {
+            $this.on("keyup.liveinput", function liveInputKeyUp(event) {
                 if ($this.is(":focus") && event.keyCode == 8) {
                     keyPress()
                 }
-            }
-            $this.on("keyup", liveInputKeyUp)
+            })
 
-            var liveInputKeyInput = function(event) {
+            $this.on("keyInput.liveinput", function liveInputKeyInput(event) {
                 var char = String.fromCharCode(event.keyCode)
 
                 if (event.keyCode === 8) { //backspace
@@ -149,8 +135,7 @@
                     writeChar(char, $cursor)
                     keyPress()
                 }
-            }
-            $this.on("keyInput", liveInputKeyInput)
+            });
 
             function reset() {
                 $this.text("")
