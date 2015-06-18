@@ -5,9 +5,14 @@
 //html, body, header, footer {
 //    background: blue;
 //}
-.row {
-    //background: red !important;
-}
+//.col-lg-10 {
+//    background: red !important;
+//}
+//
+//span.subheading {
+//    box-sizing: content-box !important;
+//    background: yellow;
+//}
 
 .live-input:focus {
     //background-color: $header-bg-col1;
@@ -19,8 +24,14 @@
     //background-color: red;
 }
 
-.site-heading h1 {
+.site-heading h1,
+.site-heading h2 {
     color: $brand-light;
+}
+
+.site-heading h2 {
+    margin: 0;
+    padding: 0;
 }
 
 .email {
