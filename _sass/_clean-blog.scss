@@ -96,21 +96,21 @@ hr.small {
         background: transparent;
         border-bottom: 1px solid transparent;
         .navbar-brand {
-            color: $brand-light;
+            color: $nav-color;
             padding: 20px;
             &:hover,
             &:focus {
-                color: $white-faded;
+                color: $nav-hover-color;
             }
         }
         .nav {
             li {
                 a {
-                    color: $brand-light;
+                    color: $nav-color;
                     padding: 20px;
                     &:hover,
                     &:focus {
-                        color: $white-faded;
+                        color: $nav-hover-color;
                     }
                 }
             }
@@ -138,10 +138,10 @@ hr.small {
             -moz-transition: -moz-transform 0.3s;
             transition: transform 0.3s;
             .navbar-brand {
-                color: $brand-dark;
+                color: $nav-color;
                 &:hover,
                 &:focus {
-                    color: $brand-primary;
+                    color: $nav-hover-color;
                 }
             }
             .nav {
@@ -150,7 +150,7 @@ hr.small {
                         color: $brand-dark;
                         &:hover,
                         &:focus {
-                            color: $brand-primary;
+                            color: $brand-green;
                         }
                     }
                 }

@@ -7,6 +7,7 @@
 $brand-primary: #463cdc;
 $brand-dark: lighten(black, 25%);
 $brand-light: white;
+$brand-green: #0a8000;
 
 $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
@@ -39,6 +40,9 @@ $header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, 
 //$header-bg: no-repeat center center;
 $header-font-col: $brand-light;
 
+$nav-color: $brand-light;
+$nav-hover-color: $brand-green;
+
 $image-height: 120px;
 $front-page-main-margin: 100px;
 
@@ -50,8 +54,8 @@ $gray-light: #eee;
 $title-fadein-base: 0.5s;
 $title-fadein-step: 0.5s;
 
-$cursor-color: red;
-$tooltip-bg-color: red;
+$cursor-color: $brand-green;
+$tooltip-bg-color: $brand-green;
 
 
 // Using media queries with like this:

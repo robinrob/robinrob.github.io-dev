@@ -6,7 +6,7 @@
 //    background: blue;
 //}
 
-header h1 {
+header h1, header h2 {
     margin-left: 1em;
 }
 
@@ -16,12 +16,17 @@ header h1 {
 }
 
 .live-input:focus {
+    //background-color: $header-bg-col1;
+    border: 1px solid $header-bg-col2;
+    box-shadow: 1px 1px 10px 0px $header-bg-col1,
+                -1px -1px 10px 0px $header-bg-col1;
     outline: none;
     //border: 1px solid white;
     //background-color: red;
 }
 
 .live-input + .tooltip > .tooltip-inner {
+    //font-size: 1.5em;
     background-color: $tooltip-bg-color;
 }
 
@@ -38,7 +43,7 @@ header h1 {
         color: $brand-light;
     }
     a:hover {
-        color: $brand-dark;
+        color: $brand-green;
     }
     margin-top: 20px;
     font-size: 20px;
