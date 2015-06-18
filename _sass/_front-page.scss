@@ -25,13 +25,14 @@ header h1 {
     //background-color: red;
 }
 
-.live-input + .tooltip > .tooltip-inner {
+.bstooltip + .tooltip > .tooltip-inner,
+{
     //font-size: 1.5em;
     background-color: $tooltip-bg-color;
 }
 
-.photo + .tooltip > .tooltip-inner {
-    background-color: $tooltip-bg-color;
+.bstooltip + .tooltip {
+    opacity: 0.95;
 }
 
 .site-heading h1 {

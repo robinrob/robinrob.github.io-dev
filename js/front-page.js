@@ -8,10 +8,17 @@ $(function () {
             "data-toggle": "tooltip",
             //"data-html": true,
             //title: "<div class=\".tooltip\"><div class=\".tooltip-inner .header-tooltip-box\">Click me to edit</div></div>",
+
             //type: "button",
             animation: true
         })
         $el.tooltip()
+
+        $el.on("click", function() {
+            $el.siblings(".tooltip").fadeOut({
+                duration: 100
+            })
+        })
     })
 
     function playTitles() {
