@@ -176,7 +176,6 @@ hr.small {
     background-attachment: scroll;
     @include background-cover();
     // NOTE: Background images are set within the HTML using inline CSS!
-    margin-bottom: 50px;
     .site-heading,
     .post-heading,
     .page-heading {
@@ -191,6 +190,7 @@ hr.small {
         text-align: center;
         h1 {
             margin-top: 0;
+            margin-left: 0.3em;
             font-size: 50px;
         }
         .subheading {
@@ -204,6 +204,7 @@ hr.small {
         @media only screen and (min-width: 768px) {
             h1 {
                 font-size: 80px;
+                margin-left: 0.6em;
             }
         }
     }
