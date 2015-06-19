@@ -11,9 +11,9 @@ $(function () {
         $el.tooltip()
     })
 
-    $title.on("click", function(event) {
-        $title.siblings(".tooltip").hide()
-    })
+    //$title.on("click", function(event) {
+    //    $title.siblings(".tooltip").hide()
+    //})
 
     function playTitles() {
         $title.liveInput({
