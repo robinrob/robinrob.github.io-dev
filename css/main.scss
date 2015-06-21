@@ -4,11 +4,17 @@
 @charset "utf-8";
 
 // Our variables
-$brand-primary: #463cdc;
-$brand-dark: lighten(black, 25%);
-$brand-light: white;
-$brand-red: rgb(255, 70, 70);
-$brand-green: #0a8000;
+$brand-orange: rgb(242, 103, 31);
+$brand-red: rgb(201, 27, 38);
+$brand-magenta: rgb(156, 15, 95);
+$brand-purple: rgb(96, 4, 122);
+$brand-darkblue: rgb(22, 10, 71);
+
+$brand-one: $brand-orange;
+$brand-two: $brand-red;
+$brand-three: $brand-magenta;
+$brand-four: $brand-purple;
+$brand-five: $brand-darkblue;
 
 $base-font-family: Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
@@ -35,16 +41,19 @@ $left-margin:      0px;
 $header-border-width: 20px;
 $header-border-col1: #000000;
 $header-border-col2: #0f0f0f;
-$header-bg-col1: lighten(black, 20%);
-$header-bg-col2: lighten(black, 10%);
-$header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, $header-bg-col2 80%, $header-bg-col1 100%);
-$header-font-col: $brand-light;
+$header-bg-col1: $brand-one;
+$header-bg-col2: $brand-two;
+$header-bg-image: linear-gradient($header-bg-col1, $header-bg-col2);
+//$header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, $header-bg-col2 80%, $header-bg-col1 100%);
+$header-font-col: $brand-five;
 
-$a-hover-color: $brand-red;
+$a-color: $brand-five;
+$a-hover-color: $brand-two;
 
-$nav-color: $brand-light;
+$nav-color: $brand-five;
 $nav-hover-color: $a-hover-color;
 
+$photo-edge-color: $brand-five;
 $image-height: 120px;
 $front-page-main-margin: 100px;
 
@@ -62,9 +71,9 @@ $tooltip-bg-color: rgb(255, 90, 90);
 $tooltip-arrow-color: $tooltip-bg-color;
 $tooltip-opacity: 0.95;
 
-$header-select-color: $brand-light;
-$select-bg-color: rgb(255, 150, 150);
-$select-color: black;
+$header-select-color: $brand-four;
+$select-color: $brand-darkblue;
+$select-bg-color: $brand-one;
 
 // Using media queries with like this:
 // @include media-query($on-palm) {

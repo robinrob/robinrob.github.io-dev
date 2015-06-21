@@ -15,31 +15,37 @@
 //}
 
 .live-input:focus {
-    //background-color: $header-bg-col1;
+    outline: none;
+}
+
+h1.live-input:focus {
     border: 1px solid $header-bg-col2;
     box-shadow: 1px 1px 10px 0px $header-bg-col1,
                 -1px -1px 10px 0px $header-bg-col1;
-    outline: none;
-    //border: 1px solid white;
-    //background-color: red;
 }
 
-.site-heading h1,
-.site-heading h2 {
-    color: $brand-light;
+h2.live-input:focus {
+    border: 1px solid $header-bg-col1;
+    box-shadow: 1px 1px 10px 0px $header-bg-col2,
+    -1px -1px 10px 0px $header-bg-col2;
+}
+
+.site-heading h1 {
+    color: $header-font-col;
 }
 
 .site-heading h2 {
+    color: $header-font-col;
     margin: 0;
     padding: 0;
 }
 
 .email {
     a {
-        color: $brand-light;
+        color: $brand-five;
     }
     a:hover {
-        color: $a-hover-color;
+        color: $brand-one;
     }
     margin-top: 20px;
     font-size: 20px;
@@ -54,16 +60,16 @@
     background-size: cover;
     background-image: url("../img/me.png");
     border-radius: $image-height / 2;
-    border: 2px groove $brand-light;
-    box-shadow: 1px 1px 5px 0px $brand-light,
-                -1px -1px 5px 0px $brand-light;
+    border: 2px groove $nav-color;
+    box-shadow: 1px 1px 5px 0px $photo-edge-color,
+                -1px -1px 5px 0px $photo-edge-color;
     transition: border 0.3s ease-out,
                 box-shadow 0.3s ease-out;
 }
 
 .photo:hover {
-    box-shadow: 2px 2px 10px 0px $brand-light,
-                -2px -2px 10px 0px $brand-light;
+    box-shadow: 2px 2px 10px 0px $photo-edge-color,
+                -2px -2px 10px 0px $photo-edge-color;
 }
 
 .macbook {
