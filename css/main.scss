@@ -26,11 +26,14 @@ $nav-hover-color: $theme-2;
 $text-color:       #000000;
 $background-color: $theme-1;
 
-$headings-color: $theme-4;
+$h2-color: $theme-3;
+$h3-color: $theme-4;
 
 $header-bg-col1: lighten($theme-4, 10%);
 $header-bg-col2: $theme-5;
 $header-font-col: $theme-1;
+
+$header-hr-color: $header-font-col;
 
 $select-color: black;
 $select-bg-color: transparentize($theme-3, 0.8);
@@ -40,7 +43,7 @@ $tooltip-color: black;
 $tooltip-bg-color: lighten($header-bg-col1, 30%);
 $tooltip-arrow-color: $tooltip-bg-color;
 
-$photo-edge-color: $theme-5;
+$photo-edge-color: $theme-2;
 
 $media-icon-col: $theme-4;
 $media-icon-hover-col: $theme-3;
@@ -53,7 +56,7 @@ $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$spacing-unit:     30px;
+$spacing-unit:     0px;
 // Width of the content area
 $content-width:    800px;
 

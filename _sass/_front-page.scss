@@ -14,6 +14,40 @@
 //    background: yellow;
 //}
 
+.wrapper {
+}
+
+h2 {
+    color: $h2-color;
+}
+
+h3 {
+    color: $h3-color;
+}
+
+.container.main {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.bstooltip + .tooltip.top,
+.bstooltip + .tooltip.left {
+    opacity: $tooltip-opacity;
+}
+
+.bstooltip + .tooltip.top > .tooltip-arrow {
+    border-top-color: $tooltip-arrow-color;
+}
+.bstooltip + .tooltip.left > .tooltip-arrow {
+    border-left-color: $tooltip-arrow-color;
+}
+
+.bstooltip + .tooltip > .tooltip-inner {
+    font-size: $tooltip-font-size;
+    color: $tooltip-color;
+    background-color: $tooltip-bg-color;
+}
+
 .live-input:focus {
     outline: none;
 }
@@ -21,6 +55,8 @@
 h1.live-input,
 h2.live-input {
     border: 1px solid rgba(0, 0, 0 ,0);
+    transition: border 0.2s ease-out,
+    box-shadow 0.2s ease-out;
 }
 
 h1.live-input:focus,
@@ -65,13 +101,14 @@ h2.live-input:hover {
     width: $image-height;
     height: $image-height;
     background-size: cover;
-    background-image: url("../img/me.png");
+    background-image: url("../img/me.jpg");
+    background-position: center;
     border-radius: $image-height / 2;
     border: 2px groove $nav-color;
     box-shadow: 1px 1px 5px 0px $photo-edge-color,
                 -1px -1px 5px 0px $photo-edge-color;
-    transition: border 0.3s ease-out,
-                box-shadow 0.3s ease-out;
+    transition: border 0.2s ease-out,
+                box-shadow 0.2s ease-out;
 }
 
 .photo:hover {
@@ -79,30 +116,27 @@ h2.live-input:hover {
                 -2px -2px 10px 0px $photo-edge-color;
 }
 
-.macbook {
-    width: 256px;
-    height: 200px;
-    background-image: url("../img/macbook.png");
-    background-size: cover;
+.blurb {
+    text-align: center;
 }
 
-.bstooltip + .tooltip.top,
-.bstooltip + .tooltip.left {
-    opacity: $tooltip-opacity;
+.services {
+    max-width: 800px;
+    text-align: left;
+    ul {
+        list-style-type: none;
+    }
+
+    ul, li {
+        margin-left: 0;
+        padding: 0;
+    }
 }
 
-.bstooltip + .tooltip.top > .tooltip-arrow {
-    border-top-color: $tooltip-arrow-color;
-}
-.bstooltip + .tooltip.left > .tooltip-arrow {
-    border-left-color: $tooltip-arrow-color;
+.services ul:nth-child(even) {
+    background: red;
 }
 
-.bstooltip + .tooltip > .tooltip-inner {
-    font-size: $tooltip-font-size;
-    color: $tooltip-color;
-    background-color: $tooltip-bg-color;
-}
 
 @for $i from 1 through 11  {
     .fadein#{$i} {
