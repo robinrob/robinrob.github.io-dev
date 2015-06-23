@@ -13,31 +13,31 @@ $grey-color:       #828282;
 /*****************************************************************/
 /* Colors (themed) */
 /*****************************************************************/
-$a-color: $brand-five;
-$a-hover-color: $brand-two;
+$a-color: $theme-five;
+$a-hover-color: $theme-two;
 
-$nav-color: $brand-five;
+$nav-color: $theme-five;
 $nav-hover-color: $a-hover-color;
 
 $text-color:       #000000;
-$background-color: $brand-four;
+$background-color: $theme-four;
 
 $select-color: black;
-$select-bg-color: lighten($brand-two, 30%);
-$header-select-color: $brand-four;
+$select-bg-color: lighten($theme-two, 30%);
+$header-select-color: $theme-four;
 
 $tooltip-color: black;
-$tooltip-bg-color: lighten($brand-one, 10%);
+$tooltip-bg-color: lighten($theme-one, 10%);
 $tooltip-arrow-color: $tooltip-bg-color;
 
-$header-bg-col1: $brand-one;
-$header-bg-col2: $brand-two;
-$header-font-col: $brand-five;
+$header-bg-col1: $theme-one;
+$header-bg-col2: $theme-two;
+$header-font-col: $theme-five;
 
-$photo-edge-color: $brand-five;
+$photo-edge-color: $theme-five;
 
 $media-icon-col: $a-color;
-$media-icon-hover-col: $brand-one;
+$media-icon-hover-col: $theme-one;
 
 $icon-color: $grey-color;
 $blockquote-color: $grey-color;
