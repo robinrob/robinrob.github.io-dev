@@ -198,7 +198,7 @@ hr.small {
             display: block;
             @include sans-serif();
             font-weight: 500;
-            margin: 10px 0 0;
+            margin: 10px 0 0 48px;
         }
         @media only screen and (min-width: 768px) {
             h1 {
