@@ -18,11 +18,14 @@
 }
 
 h2 {
+    font-size: 35px;
     color: $h2-color;
+    margin-bottom: 30px;
 }
 
 h3 {
     color: $h3-color;
+    margin-bottom: 10px;
 }
 
 .container.main {
@@ -117,6 +120,7 @@ h2.live-input:hover {
 }
 
 .blurb {
+    margin: 40px 0 80px 0;
     text-align: center;
 }
 
@@ -129,6 +133,11 @@ h2.live-input:hover {
 
     ul, li {
         margin-left: 0;
+        padding: 0;
+    }
+
+    p {
+        margin: 20px 0 50px 0;
         padding: 0;
     }
 }
