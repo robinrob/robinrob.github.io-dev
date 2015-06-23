@@ -42,10 +42,10 @@ h2.live-input:focus {
 
 .email {
     a {
-        color: $theme-five;
+        color: $header-font-col;
     }
     a:hover {
-        color: $theme-one;
+        color: darken($header-font-col, 20%);
     }
     margin-top: 20px;
     font-size: 20px;

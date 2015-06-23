@@ -9,35 +9,41 @@
 /* Base colors (non-themed) */
 /*****************************************************************/
 $grey-color:       #828282;
+$gray-dark: lighten(black, 25%);
+$white: white;
+$gray-light: #eee;
 
 /*****************************************************************/
 /* Colors (themed) */
 /*****************************************************************/
-$a-color: $theme-five;
-$a-hover-color: $theme-two;
+$a-color: $theme-3;
+$a-visited: $a-color;
+$a-hover-color: $theme-3;
 
-$nav-color: $theme-five;
-$nav-hover-color: $a-hover-color;
+$nav-color: $theme-1;
+$nav-hover-color: $theme-2;
 
 $text-color:       #000000;
-$background-color: $theme-four;
+$background-color: $theme-1;
+
+$headings-color: $theme-4;
+
+$header-bg-col1: lighten($theme-4, 10%);
+$header-bg-col2: $theme-5;
+$header-font-col: $theme-1;
 
 $select-color: black;
-$select-bg-color: lighten($theme-two, 30%);
-$header-select-color: $theme-four;
+$select-bg-color: transparentize($theme-3, 0.8);
+$header-select-color: $header-font-col;
 
 $tooltip-color: black;
-$tooltip-bg-color: lighten($theme-one, 10%);
+$tooltip-bg-color: lighten($header-bg-col1, 30%);
 $tooltip-arrow-color: $tooltip-bg-color;
 
-$header-bg-col1: $theme-one;
-$header-bg-col2: $theme-two;
-$header-font-col: $theme-five;
+$photo-edge-color: $theme-5;
 
-$photo-edge-color: $theme-five;
-
-$media-icon-col: $a-color;
-$media-icon-hover-col: $theme-one;
+$media-icon-col: $theme-4;
+$media-icon-hover-col: $theme-3;
 
 $icon-color: $grey-color;
 $blockquote-color: $grey-color;
@@ -57,16 +63,10 @@ $left-margin:      0px;
 
 $header-border-width: 20px;
 
-$header-bg-image: linear-gradient($header-bg-col1, $header-bg-col2);
-//$header-bg-image: linear-gradient(0deg, $header-bg-col1 0, $header-bg-col2 20%, $header-bg-col2 80%, $header-bg-col1 100%);
+$header-bg-image: linear-gradient(transparentize($header-bg-col1, 0.0), transparentize($header-bg-col2, 0.0));
 
 $image-height: 120px;
 $front-page-main-margin: 100px;
-
-$gray-dark: lighten(black, 25%);
-$white: white;
-$white-faded: fade(white, 80%);
-$gray-light: #eee;
 
 $title-fadein-base: 0.5s;
 $title-fadein-step: 0.5s;
