@@ -92,7 +92,7 @@
             $this.off("focusin.liveinput focousout.liveinput keydown.liveinput keypress.liveinput keyup.liveinput keyinput.liveinput")
             $this.on("focusin.liveinput", function() {
                 keyPress()
-                showCursor(function() {setTimeout(toggleCursor, params.cursorFadeDuration)})
+                showCursor(toggleCursor)
             })
 
             $this.on("focusout.liveinput", function() {
