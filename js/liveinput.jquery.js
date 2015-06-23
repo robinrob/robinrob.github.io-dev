@@ -96,6 +96,7 @@
             })
 
             $this.on("focusout.liveinput", function() {
+                console.log("FOCUS OUT")
                 $cursor.stop(true)
                 hideCursor()
             })
