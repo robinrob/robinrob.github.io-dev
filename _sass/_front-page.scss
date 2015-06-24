@@ -122,7 +122,7 @@ h2.live-input:hover {
 
 .blurb {
     margin: 40px 0 80px 0;
-    text-align: center;
+    text-align: justify;
 }
 
 .main {
@@ -143,8 +143,8 @@ h2.live-input:hover {
     }
 }
 
-.services {
-    //background-color: red;
+.services p {
+    text-align: justify;
 }
 .services ul:nth-child(even) {
     //background: red;
