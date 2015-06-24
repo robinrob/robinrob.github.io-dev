@@ -39,8 +39,18 @@
                 html: char,
                 class: "char"
             });
-            $($char).insertBefore($cursorObj)
+            $char.insertBefore($cursorObj)
             keyPress()
+        }
+
+        function writeInvisibleCursor($cursorObj) {
+            var $char = $("<span />", {
+                html: "_"
+            });
+            $char.css({
+                "opacity": 0
+            })
+            $char.insertBefore($cursorObj)
         }
 
         function writeText(text, $cursorObj, callback) {
@@ -77,11 +87,15 @@
                 text: "_",
                 class: "cursor"
             });
-            $cursor.css("margin-left", "0.05em")
+            $cursor.css({
+                "z-index" : "1",
+                "margin-left": "0.05em"
+            })
 
             setTimeout(function () {
                 reset()
                 $this.append($cursor)
+                writeInvisibleCursor($cursor)
                 writeText(params.text, $cursor, function() {
                     fadeOutCursor()
                     params.callback()
