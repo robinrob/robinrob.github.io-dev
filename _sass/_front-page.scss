@@ -104,22 +104,6 @@ header {
 .wrapper {
     text-align: center;
 
-    .blurb {
-        display: inline-block;
-        max-width: 900px;
-        margin: 40px 0 0px 0;
-
-        p {
-            text-align: justify;
-        }
-
-        hr.large {
-            max-width: 90%;
-            border-color: $theme-2;
-            //opacity: 0;
-        }
-    }
-
     .main {
         display: inline-block;
         //max-width: 800px;
@@ -152,6 +136,23 @@ header {
         hr.large {
             //opacity: 0;
             border-color: $theme-2;
+        }
+
+        .blurb {
+            display: inline-block;
+            max-width: 900px;
+            margin: 40px 0 0px 0;
+            color: black;
+
+            p {
+                text-align: justify;
+            }
+
+            hr.large {
+                max-width: 90%;
+                border-color: $theme-2;
+                //opacity: 0;
+            }
         }
 
         .section {
