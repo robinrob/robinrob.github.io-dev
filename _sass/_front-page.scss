@@ -1,19 +1,3 @@
-//* {
-//    background: red;
-//}
-//
-//html, body, header, footer {
-//    background: blue;
-//}
-//.col-lg-10 {
-//    background: red !important;
-//}
-//
-//span.subheading {
-//    box-sizing: content-box !important;
-//    background: yellow;
-//}
-
 .mobile-padding {
     margin-left: 10px;
 }
@@ -27,11 +11,6 @@ h2 {
 h3 {
     color: $h3-color;
     margin-bottom: 10px;
-}
-
-.container.main {
-    margin-left: 0;
-    padding-left: 0;
 }
 
 .bstooltip + .tooltip.top,
@@ -77,97 +56,129 @@ h2.live-input:hover {
     -1px -1px 10px 0px $header-bg-col2;
 }
 
-.site-heading h1 {
-    color: $header-font-col;
-}
-
-.site-heading h2 {
-    color: $header-font-col;
-    margin: 0;
-    padding: 5px;
-}
-
-.email {
-    a {
+.site-heading {
+    h1 {
         color: $header-font-col;
-    }
-    a:hover {
-        color: darken($header-font-col, 20%);
-    }
-    margin-top: 20px;
-    font-size: 20px;
-    text-align: center;
-}
-
-.photo {
-    display: inline-block;
-    text-align: center;
-    width: $image-height;
-    height: $image-height;
-    background-size: cover;
-    background-image: url("../img/me.jpg");
-    background-position: center;
-    border-radius: $image-height / 2;
-    border: 2px groove $nav-color;
-    box-shadow: 1px 1px 5px 0px $photo-edge-color,
-                -1px -1px 5px 0px $photo-edge-color;
-    transition: border 0.2s ease-out,
-                box-shadow 0.2s ease-out;
-}
-
-.photo:hover {
-    box-shadow: 2px 2px 10px 0px $photo-edge-color,
-                -2px -2px 10px 0px $photo-edge-color;
-}
-
-.blurb {
-    p {
-        margin: 40px 0 80px 0;
-        text-align: justify;
-    }
-
-    hr.large {
-        max-width: 90%;
-        border-color: $theme-2;
-        //opacity: 0;
-    }
-}
-
-.main {
-    width: 100%;
-    text-align: left;
-    ul {
-        list-style-type: none;
-    }
-
-    ul, li {
-        margin-left: 0;
-        padding: 0;
-    }
-
-    p {
-        margin: 5px 0 50px 0;
-        padding: 0;
     }
 
     h2 {
+        color: $header-font-col;
+        margin: 0;
+        padding: 5px;
+    }
+}
+
+header {
+    .email {
+        a {
+            color: $header-font-col;
+            &:hover {
+                color: darken($header-font-col, 20%);
+            }
+        }
+        margin-top: 20px;
+        font-size: 20px;
         text-align: center;
-        margin-bottom: 50px;
     }
 
-    hr.large {
-        //opacity: 0;
-        border-color: $theme-2;
+    .photo {
+        display: inline-block;
+        text-align: center;
+        width: $image-height;
+        height: $image-height;
+        background-size: cover;
+        background-image: url("../img/me.jpg");
+        background-position: center;
+        border-radius: $image-height / 2;
+        border: 2px groove $nav-color;
+        box-shadow: 1px 1px 5px 0px $photo-edge-color,
+        -1px -1px 5px 0px $photo-edge-color;
+        transition: border 0.2s ease-out,
+        box-shadow 0.2s ease-out;
+
+        &:hover {
+            box-shadow: 2px 2px 10px 0px $photo-edge-color,
+            -2px -2px 10px 0px $photo-edge-color;
+        }
     }
 }
 
-.services p {
-    text-align: justify;
-}
-.services ul:nth-child(even) {
-    //background: red;
-}
+.wrapper {
+    text-align: center;
 
+    .blurb {
+        display: inline-block;
+        max-width: 900px;
+        margin: 40px 0 0px 0;
+
+        p {
+            text-align: justify;
+        }
+
+        hr.large {
+            max-width: 90%;
+            border-color: $theme-2;
+            //opacity: 0;
+        }
+    }
+
+    .main {
+        display: inline-block;
+        //max-width: 800px;
+        width: 100%;
+        text-align: left;
+        padding-left: 0;
+        .container {
+            max-width: 900px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul, li {
+            margin-left: 0;
+            padding: 0;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 5px 0 50px 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        hr.large {
+            //opacity: 0;
+            border-color: $theme-2;
+        }
+
+        .section {
+            padding-top: 50px;
+        }
+
+        .section:nth-of-type(even) {
+            background: lighten($theme-2, 40%);
+        }
+
+        .section:nth-of-type(odd) {
+            //background: lighten($theme-2, 40%);
+        }
+
+        .services {
+            p {
+                text-align: justify;
+            }
+        }
+
+        .projects {
+        }
+    }
+}
 
 @for $i from 1 through 11  {
     .fadein#{$i} {
