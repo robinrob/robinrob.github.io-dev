@@ -54,6 +54,12 @@ hr.small {
     border-color: $header-hr-color;
 }
 
+hr.large {
+    max-width: 60%;
+    margin: 50px auto;
+    border-width: 6px;
+}
+
 .navbar-collapse {
     text-align: center;
     > .navbar-nav {
@@ -189,6 +195,7 @@ hr.small {
         text-align: center;
         h1 {
             margin-top: 0;
+            margin-bottom: 0.25em;
             font-size: 50px;
         }
         .subheading {
