@@ -9,6 +9,7 @@
             writeDelay: 150,
             editable: true,
             cursorColor: "white",
+            cursorMargin: "0.05em",
             callback: function() {}
         }
         var params = $.extend({}, defaults, options)
@@ -39,8 +40,19 @@
                 html: char,
                 class: "char"
             });
-            $($char).insertBefore($cursorObj)
+            $char.insertBefore($cursorObj)
             keyPress()
+        }
+
+        function writeInvisibleCursor($cursorObj) {
+            var $char = $("<span />", {
+                html: "_"
+            });
+            $char.css({
+                "opacity": 0,
+                "margin-right": params.cursorMargin
+            })
+            $char.insertBefore($cursorObj)
         }
 
         function writeText(text, $cursorObj, callback) {
@@ -77,11 +89,15 @@
                 text: "_",
                 class: "cursor"
             });
-            $cursor.css("margin-left", "0.05em")
+            $cursor.css({
+                "z-index" : "1",
+                "margin-left": params.cursorMargin
+            })
 
             setTimeout(function () {
                 reset()
                 $this.append($cursor)
+                writeInvisibleCursor($cursor)
                 writeText(params.text, $cursor, function() {
                     fadeOutCursor()
                     params.callback()
