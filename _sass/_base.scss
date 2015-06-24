@@ -91,17 +91,18 @@ a {
     color: $a-color;
     text-decoration: none;
 
-    &:visited {
+    &:active,
+    &:focus,
+    &:visited,
+    &:visited:active,
+    &:visited:focus {
         color: $a-color;
     }
 
-    &:hover {
-        color: $a-hover-color;
-        text-decoration: underline;
-    }
-
+    &:hover,
     &:visited:hover {
         color: $a-hover-color;
+        text-decoration: underline;
     }
 }
 
