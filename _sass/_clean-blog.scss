@@ -1,7 +1,7 @@
 @import "mixins";
 
 // Global Components
-body, .main, .blurb {
+body, .main .blurb {
     @include serif();
     font-size: 20px;
     color: $theme-5;
