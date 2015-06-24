@@ -195,7 +195,7 @@
             }
 
             function showCursor(callback) {
-                fadeInCursor(0, callback)
+                fadeInCursor(params.cursorFadeDuration / 2, callback)
             }
         })
     }
