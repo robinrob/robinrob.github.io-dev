@@ -140,7 +140,8 @@
             })
 
             $this.on("keyInput.liveinput", function liveInputKeyInput(event) {
-                var char = String.fromCharCode(event.keyCode)
+                var code = event.charCode || event.keyCode;
+                var char = String.fromCharCode(code)
 
                 if (event.keyCode === 8) { //backspace
                     $cursor.siblings().last().remove()
