@@ -71,7 +71,7 @@ gulp.task('haml-watch', function () {
     var here = path.resolve('./')
     var locations = [here, '_includes', '_layouts', 'cv']
     locations.forEach(function (location) {
-        var src = location + '/haml/*.haml'
+        var src = location + '/_haml/*.haml'
         var dest = location
         gulp.src(src).
             pipe(plumber({
