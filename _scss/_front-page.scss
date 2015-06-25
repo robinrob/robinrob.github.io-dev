@@ -168,6 +168,14 @@ header {
             color: $theme-5;
         }
 
+        .projects {
+            ul > li:after {
+                width: 100px;
+                height: 100px;
+
+            }
+        }
+
         .endorsement {
             text-align: center;
             margin-bottom: 8%;
@@ -189,6 +197,34 @@ header {
             }
         }
     }
+}
+
+.project {
+    //clear: both;
+}
+.project-image {
+    //display: inline-block;
+    text-align: center;
+    width: $endorser-photo-size;
+    height: $endorser-photo-size;
+    background-size: cover;
+    background-position: center;
+    border-radius: $endorser-photo-size / 2;
+    border: 2px groove $theme-4;
+}
+
+.google-sf {
+    background-image: url('../img/sean.jpg');
+}
+
+.right {
+    //clear: right;
+    float: right;
+}
+
+.left {
+    //clear: left;
+    float: left;
 }
 
 .photo-sean {

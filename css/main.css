@@ -672,6 +672,9 @@ header .photo {
       background: #e6e6e6; }
     .wrapper .main .section:nth-of-type(odd) {
       color: black; }
+    .wrapper .main .projects ul > li:after {
+      width: 100px;
+      height: 100px; }
     .wrapper .main .endorsement {
       text-align: center;
       margin-bottom: 8%; }
@@ -683,6 +686,24 @@ header .photo {
         font-style: normal; }
         .wrapper .main .endorsement .caption a {
           color: #0085a1; }
+
+.project-image {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50px;
+  border: 2px groove #404040; }
+
+.google-sf {
+  background-image: url("../img/sean.jpg"); }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
 
 .photo-sean {
   display: inline-block;
