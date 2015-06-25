@@ -672,13 +672,23 @@ header .photo {
       background: #e6e6e6; }
     .wrapper .main .section:nth-of-type(odd) {
       color: black; }
-    .wrapper .main .projects ul > li:after {
-      width: 100px;
-      height: 100px; }
+    .wrapper .main .projects ul li {
+      clear: right; }
+      .wrapper .main .projects ul li:after {
+        width: 100px;
+        height: 100px; }
     .wrapper .main .endorsement {
       text-align: center;
       margin-bottom: 8%; }
       .wrapper .main .endorsement .endorsement-photo {
+        display: inline-block;
+        text-align: center;
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50px;
+        border: 2px groove #404040;
         margin-bottom: 10px; }
       .wrapper .main .endorsement blockquote {
         color: black; }
@@ -687,8 +697,12 @@ header .photo {
         .wrapper .main .endorsement .caption a {
           color: #0085a1; }
 
+.project {
+  clear: right; }
+
 .project-image {
-  text-align: center;
+  display: inline-block;
+  text-align: right;
   width: 100px;
   height: 100px;
   background-size: cover;
@@ -706,15 +720,10 @@ header .photo {
   float: left; }
 
 .photo-sean {
-  display: inline-block;
-  text-align: center;
-  width: 100px;
-  height: 100px;
-  background-size: cover;
-  background-image: url("../img/sean.jpg");
-  background-position: center;
-  border-radius: 50px;
-  border: 2px groove #404040; }
+  background-image: url("../img/sean.jpg"); }
+
+.photo-ben {
+  background-image: url("../img/ben.jpg"); }
 
 .fadein1 {
   -webkit-animation: fadein 1s; }

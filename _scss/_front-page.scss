@@ -169,10 +169,14 @@ header {
         }
 
         .projects {
-            ul > li:after {
-                width: 100px;
-                height: 100px;
-
+            ul {
+                li {
+                    clear: right;
+                    &:after {
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
             }
         }
 
@@ -181,6 +185,14 @@ header {
             margin-bottom: 8%;
 
             .endorsement-photo {
+                display: inline-block;
+                text-align: center;
+                width: $endorser-photo-size;
+                height: $endorser-photo-size;
+                background-size: cover;
+                background-position: center;
+                border-radius: $endorser-photo-size / 2;
+                border: 2px groove $theme-4;
                 margin-bottom: 10px;
             }
 
@@ -200,11 +212,11 @@ header {
 }
 
 .project {
-    //clear: both;
+    clear: right;
 }
 .project-image {
-    //display: inline-block;
-    text-align: center;
+    display: inline-block;
+    text-align: right;
     width: $endorser-photo-size;
     height: $endorser-photo-size;
     background-size: cover;
@@ -228,15 +240,11 @@ header {
 }
 
 .photo-sean {
-    display: inline-block;
-    text-align: center;
-    width: $endorser-photo-size;
-    height: $endorser-photo-size;
-    background-size: cover;
     background-image: url('../img/sean.jpg');
-    background-position: center;
-    border-radius: $endorser-photo-size / 2;
-    border: 2px groove $theme-4;
+}
+
+.photo-ben {
+    background-image: url('../img/ben.jpg');
 }
 
 @for $i from 1 through 11  {

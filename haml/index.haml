@@ -62,7 +62,8 @@ layout: front-page
                 %p
                   I worked as a core developer on a system to synchronise Email, Calendar and Contact information between Google Apps
                   and Salesforce.com platforms.
-                  .project-image.google-sf.right
+              .project-image.google-sf.right
+
             %li
               .project
                 %h3
@@ -71,7 +72,7 @@ layout: front-page
                   I designed, built, implemented and maintained a robust archiving and retrieval system for Salesforce Email Messages.
                   Salesforce data was stored on Amazon Web Services S3 for a cost-effective solution. The system was implemented both
                   in-house and for a customer.
-                  .project-image.google-sf.right
+              .project-image.google-sf.right
 
   .section
     .container
@@ -80,10 +81,17 @@ layout: front-page
         .col-xs-12
           %ul
             %li.endorsement
-              .endorsement-photo.photo-sean
+              %a{:href => "http://seanw.org", :target => "_blank"}
+                .endorsement-photo.photo-sean
               %blockquote "Robin is a passionate software developer and a keen and fast learner. Combined with excellent communication skills and professionalism he is great to work with."
-              .caption <a href="http://seanw.org" target="_blank">Sean Wilson</a>, Freelance Developer
+              .caption
+                %a{:href => "http://seanw.org", :target => "_blank"} Sean Wilson
+                , Freelance Developer
+
             %li.endorsement
-              .endorsement-photo.photo-sean
-              %blockquote "Robin is a passionate software developer and a keen and fast learner. Combined with excellent communication skills and professionalism he is great to work with."
-              .caption <a href="http://seanw.org" target="_blank">Sean Wilson</a>, Freelance Developer
+              %a{:href => "https://uk.linkedin.com/pub/ben-johnson/29/105/552", :target => "_blank"}
+                .endorsement-photo.photo-ben
+              %blockquote "Robin has an unbreakable comittment to quality. What you see is what you get - a reliable and intelligent business partner."
+              .caption
+                %a{:href => "https://uk.linkedin.com/pub/ben-johnson/29/105/552", :target => "_blank"} Ben Johnson
+                , Principal Consultant at Ryze Limited
