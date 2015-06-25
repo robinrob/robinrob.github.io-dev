@@ -652,7 +652,7 @@ header .photo {
       padding: 0; }
     .wrapper .main h2 {
       text-align: center;
-      margin-bottom: 8%; }
+      margin-bottom: 5%; }
     .wrapper .main hr.large {
       border-color: gray; }
     .wrapper .main .blurb {
@@ -668,6 +668,10 @@ header .photo {
     .wrapper .main .section {
       padding-top: 3%;
       padding-bottom: 3%; }
+      .wrapper .main .section p.section-intro {
+        color: #404040;
+        text-align: center;
+        font-size: 19px; }
     .wrapper .main .section:nth-of-type(even) {
       background: #e6e6e6; }
     .wrapper .main .section:nth-of-type(odd) {
