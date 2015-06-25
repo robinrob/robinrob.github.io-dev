@@ -11,7 +11,6 @@ var watch = require('gulp-watch')
 var changed = require('gulp-changed')
 var ngmin = require('gulp-ngmin')
 var task = require('gulp-task')
-var autoprefixer = require('gulp-autoprefixer')
 var runsequence = require('run-sequence')
 var shell = require('shelljs/global')
 var path = require('path')
@@ -53,16 +52,6 @@ gulp.task('browser-sync', ['jekyll-build'], function () {
         browser: "safari"
     });
 });
-
-//gulp.task('css', function () {
-//    console.log("CSS")
-//    return gulp.src('_site/css/main.css')
-//        .pipe(autoprefixer({
-//            browsers: ['last 2 versions'],
-//            cascade: false
-//        }))
-//        .pipe(gulp.dest('.'));
-//});
 
 /**
  * Compile files from _scss into both _site/css (for live injecting) and site (for future jekyll builds)
