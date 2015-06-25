@@ -694,11 +694,12 @@ header .photo {
         text-align: center;
         width: 100px;
         height: 100px;
+        margin-bottom: 10px;
         background-size: cover;
         background-position: center;
         border-radius: 50px;
-        border: 2px groove #404040;
-        margin-bottom: 10px; }
+        border: 1px groove #404040;
+        box-shadow: 1px 1px 1px 0px gray, -1px -1px 1px 0px gray; }
       .wrapper .main .endorsement blockquote {
         color: black; }
       .wrapper .main .endorsement .caption {
