@@ -35,9 +35,13 @@ gulp.task('jekyll-build', function (done) {
  * Rebuild Jekyll & do page reload
  */
 gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
+    runsequence('css')
     reload()
 });
 
+gulp.task('reload', function() {
+    reload()
+})
 /**
  * Wait for jekyll-build, then launch the Server
  */
@@ -46,9 +50,19 @@ gulp.task('browser-sync', ['jekyll-build'], function () {
         server: {
             baseDir: '_site'
         },
-        browser: "google chrome"
+        browser: "safari"
     });
 });
+
+//gulp.task('css', function () {
+//    console.log("CSS")
+//    return gulp.src('_site/css/main.css')
+//        .pipe(autoprefixer({
+//            browsers: ['last 2 versions'],
+//            cascade: false
+//        }))
+//        .pipe(gulp.dest('.'));
+//});
 
 /**
  * Compile files from _scss into both _site/css (for live injecting) and site (for future jekyll builds)
@@ -59,7 +73,7 @@ gulp.task('sass', function () {
             includePaths: ['scss'],
             onError: browserSync.notify
         }))
-        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
+        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(gulp.dest('_site/css'))
         .pipe(gulp.dest('css'));
 });
@@ -91,11 +105,12 @@ gulp.task('haml-watch', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch(['_config.yml', '_posts/*', 'img/*', '_sass/*.scss', 'css/*.css', 'css/main.scss', 'js/*', 'orbiter/**/*'], ['jekyll-rebuild']);
+    gulp.watch('_scss/*.scss', ['sass', 'reload']);
+    gulp.watch(['_config.yml', '_posts/*', 'img/*', 'js/*', 'orbiter/**/*'], ['jekyll-rebuild']);
 });
 
 /**
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync & watch files.
  */
-gulp.task('default', ['browser-sync', 'haml-watch', 'watch']);
+gulp.task('default', ['browser-sync', 'haml-watch', 'sass', 'watch']);
