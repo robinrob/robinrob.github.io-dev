@@ -170,11 +170,29 @@ header {
 
         .projects {
             ul {
+                //overflow: hidden;
                 li {
-                    clear: right;
-                    &:after {
+                    &:before {
+                        display: inline-block;
+                        float: right;
                         width: 100px;
                         height: 100px;
+
+                    }
+                }
+                li.project {
+                    &:before {
+                        width: $endorser-photo-size;
+                        height: $endorser-photo-size;
+                        background-size: cover;
+                        background-position: center;
+                        border-radius: $endorser-photo-size / 2;
+                        border: 2px groove $theme-4;
+                    }
+                }
+                li.project-google-sf {
+                    &:before {
+                        background-image: url('../img/sean.jpg');
                     }
                 }
             }
@@ -211,12 +229,8 @@ header {
     }
 }
 
-.project {
-    clear: right;
-}
 .project-image {
-    display: inline-block;
-    text-align: right;
+    //display: block;
     width: $endorser-photo-size;
     height: $endorser-photo-size;
     background-size: cover;
@@ -230,12 +244,10 @@ header {
 }
 
 .right {
-    //clear: right;
     float: right;
 }
 
 .left {
-    //clear: left;
     float: left;
 }
 

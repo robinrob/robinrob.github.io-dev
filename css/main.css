@@ -672,11 +672,20 @@ header .photo {
       background: #e6e6e6; }
     .wrapper .main .section:nth-of-type(odd) {
       color: black; }
-    .wrapper .main .projects ul li {
-      clear: right; }
-      .wrapper .main .projects ul li:after {
-        width: 100px;
-        height: 100px; }
+    .wrapper .main .projects ul li:before {
+      display: inline-block;
+      float: right;
+      width: 100px;
+      height: 100px; }
+    .wrapper .main .projects ul li.project:before {
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50px;
+      border: 2px groove #404040; }
+    .wrapper .main .projects ul li.project-google-sf:before {
+      background-image: url("../img/sean.jpg"); }
     .wrapper .main .endorsement {
       text-align: center;
       margin-bottom: 8%; }
@@ -697,12 +706,7 @@ header .photo {
         .wrapper .main .endorsement .caption a {
           color: #0085a1; }
 
-.project {
-  clear: right; }
-
 .project-image {
-  display: inline-block;
-  text-align: right;
   width: 100px;
   height: 100px;
   background-size: cover;
