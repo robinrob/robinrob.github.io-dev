@@ -1,19 +1,20 @@
-var gulp        = require('gulp');
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var reload      = browserSync.reload
-var sass        = require('gulp-sass');
-var haml        = require('gulp-ruby-haml');
-var prefix      = require('gulp-autoprefixer');
-var cp          = require('child_process');
-var gcallback   = require('gulp-callback')
-var plumber     = require('gulp-plumber')
-var watch       = require('gulp-watch')
-var changed     = require('gulp-changed')
-var ngmin       = require('gulp-ngmin')
-var task        = require('gulp-task')
+var reload = browserSync.reload
+var sass = require('gulp-sass');
+var haml = require('gulp-ruby-haml');
+var prefix = require('gulp-autoprefixer');
+var cp = require('child_process');
+var gcallback = require('gulp-callback')
+var plumber = require('gulp-plumber')
+var watch = require('gulp-watch')
+var changed = require('gulp-changed')
+var ngmin = require('gulp-ngmin')
+var task = require('gulp-task')
+var autoprefixer = require('gulp-autoprefixer')
 var runsequence = require('run-sequence')
-var shell       = require('shelljs/global')
-var path        = require('path')
+var shell = require('shelljs/global')
+var path = require('path')
 
 
 var messages = {
@@ -25,7 +26,7 @@ function onError(err) {
     shell.exec("say wanker")
 }
 
-gulp.task('jekyll-build', function(done) {
+gulp.task('jekyll-build', function (done) {
     browserSync.notify(messages.jekyllBuild)
     return cp.spawn('jekyll', ['build'], {stdio: 'inherit'}).on('close', done);
 })
@@ -40,7 +41,7 @@ gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
 /**
  * Wait for jekyll-build, then launch the Server
  */
-gulp.task('browser-sync', ['jekyll-build'], function() {
+gulp.task('browser-sync', ['jekyll-build'], function () {
     browserSync({
         server: {
             baseDir: '_site'
@@ -58,16 +59,16 @@ gulp.task('sass', function () {
             includePaths: ['scss'],
             onError: browserSync.notify
         }))
-        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
+        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
         .pipe(gulp.dest('_site/css'))
         .pipe(gulp.dest('css'));
 });
 
-gulp.task('haml-watch', function() {
+gulp.task('haml-watch', function () {
     // destination of '.' in gulp.dest() means relative to src!
     var here = path.resolve('./')
     var locations = [here, '_includes', '_layouts', 'cv']
-    locations.forEach(function(location) {
+    locations.forEach(function (location) {
         var src = location + '/haml/*.haml'
         var dest = location
         gulp.src(src).
