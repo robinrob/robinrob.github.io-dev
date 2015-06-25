@@ -670,8 +670,30 @@ header .photo {
       padding-bottom: 3%; }
     .wrapper .main .section:nth-of-type(even) {
       background: #e6e6e6; }
-    .wrapper .main .services p {
-      text-align: justify; }
+    .wrapper .main .section:nth-of-type(odd) {
+      color: black; }
+    .wrapper .main .endorsement {
+      text-align: center;
+      margin-bottom: 8%; }
+      .wrapper .main .endorsement .endorsement-photo {
+        margin-bottom: 10px; }
+      .wrapper .main .endorsement blockquote {
+        color: black; }
+      .wrapper .main .endorsement .caption {
+        font-style: normal; }
+        .wrapper .main .endorsement .caption a {
+          color: #0085a1; }
+
+.photo-sean {
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-image: url("../img/sean.jpg");
+  background-position: center;
+  border-radius: 50px;
+  border: 2px groove #404040; }
 
 .fadein1 {
   -webkit-animation: fadein 1s; }

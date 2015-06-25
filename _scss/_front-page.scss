@@ -165,18 +165,42 @@ header {
         }
 
         .section:nth-of-type(odd) {
-            //background: lighten($theme-2, 40%);
+            color: $theme-5;
         }
 
-        .services {
-            p {
-                text-align: justify;
+        .endorsement {
+            text-align: center;
+            margin-bottom: 8%;
+
+            .endorsement-photo {
+                margin-bottom: 10px;
+            }
+
+            blockquote {
+                color: $theme-5;
+            }
+
+            .caption {
+                font-style: normal;
+
+                a {
+                    color: $a-color;
+                }
             }
         }
-
-        .projects {
-        }
     }
+}
+
+.photo-sean {
+    display: inline-block;
+    text-align: center;
+    width: $endorser-photo-size;
+    height: $endorser-photo-size;
+    background-size: cover;
+    background-image: url('../img/sean.jpg');
+    background-position: center;
+    border-radius: $endorser-photo-size / 2;
+    border: 2px groove $theme-4;
 }
 
 @for $i from 1 through 11  {
