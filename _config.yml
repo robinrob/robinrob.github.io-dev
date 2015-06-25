@@ -2,7 +2,6 @@
 title: Robin Smith
 subtitle: Freelance web and mobile developer - UK
 brand: Robin Smith Software
-#header-img: img/bg-edinburgh-red.png
 email: robin@mrrobinsmith.com
 description: > # this means to ignore newlines until "baseurl:"
   Robin Smith Freelance Web application development services
@@ -17,9 +16,8 @@ linkedin: http://www.linkedin.com/in/rsmithio
 markdown: kramdown
 author: Robin Smith
 
-
 # Allow /index route in place of /index.html etc
 permalink: pretty
 
-# Exc
-exclude: [node_modules, haml]
+# Excludes these files/folders from being included into Jekyll _site folder.
+exclude: [node_modules]
