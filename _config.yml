@@ -13,7 +13,7 @@ twitter: rsmith_io
 linkedin: rsmithio
 
 baseurl: "/robinrob.github.io-dev" # the subpath of your site, e.g. /blog
-url: https://rsmith.io   # with the https protocol-baseurl: "/robinrob.github.io-dev" # the subpath of your site, e.g. /blog
+url: https://robinrob.github.io   # with the https protocol
 enforce_ssl: rsmith.io   # without any protocol
 
 # Build settings
