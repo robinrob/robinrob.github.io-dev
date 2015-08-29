@@ -1,30 +1,308 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml" />
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Robin Smith - Freelance Developer</title>
+    <description>Experienced freelance software developer designing and building custom web applications and integrations using modern cloud technologies and frameworks.
+</description>
+    <link>https://robinrob.github.io/robinrob.github.io-dev/</link>
+    <atom:link href="https://robinrob.github.io/robinrob.github.io-dev/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 29 Aug 2015 13:10:59 +0100</pubDate>
+    <lastBuildDate>Sat, 29 Aug 2015 13:10:59 +0100</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>Learn Regex or Regret It</title>
+        <description>&lt;p&gt;Do you like challenging logic puzzles? Games that give you a set of root principles then offer up increasingly hard
+problems that require ever-more creative ways of using the root principles to solve?&lt;/p&gt;
+
+&lt;p&gt;I do and, once I actually sat down to dedicate some time to the pure learning of the subject of regular expressions, the
+above viewpoint is the way in which I came to view this learning process. Learning how to use regular expressions is an exercise of
+applying the known rules of the game to situations that require your creativity, logical thinking and intuition to solve.&lt;/p&gt;
+
+&lt;p&gt;Like all things that are difficult to do well, if you can make the process of doing something into a game you will perform
+much better. The task of solving regex problems is a &lt;em&gt;perfect&lt;/em&gt; candidate for game-making!&lt;/p&gt;
+
+&lt;p&gt;If you only reach this stage in your appreciation of regular expressions then you may already find great value in them. But they
+are also among one of the few truly powerful tools available to programmers that transcend programming language, framework
+or project that you are working on. If you find Javascript to be a language worth learning because of it&amp;#39;s popularity
+and relevance - a mere programming language, or AngularJS a framework worth learning because it&amp;#39;s popular at the
+moment - then you should logically view a tool like regular expressions as being of great importance and relevance in your profession.&lt;/p&gt;
+
+&lt;p&gt;Regular expressions have been around for decades and have changed little in their basic philosophy and syntax. Yes there
+may be several varying syntaxes around, but these variations are much less than those between programming languages and the root philosophy
+does not change with syntax, unlike between programming languages such as Python or Ruby.&lt;/p&gt;
+
+&lt;p&gt;More important than any of the above great reasons for learning regular expressions, the fact remains that they
+are an incredibly powerful and efficient way of solving certain types of text-reading and text-manipulation problems.
+To take a simple example let&amp;#39;s say that you want to read in some user input to specify an IPv4 address such as: &amp;#39;123.255.0.10&amp;#39;.
+You would like to ensure that the value that they have entered is valid before they submit it. It is not obvious how you would solve this elegantly
+without using a regular expression. How much code would it take? Let&amp;#39;s spell out the details of the puzzle by specifying
+what sort of input we would accept as an IPv4 address:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;It must consist of four groups of numerical digits separated by a period&lt;/li&gt;
+&lt;li&gt;Each group of digits must consist of 1-3 numbers&lt;/li&gt;
+&lt;li&gt;Each group of numbers must represent a decimal integer with a value within the range 0 to 255 (octet)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I&amp;#39;m not sure how much code that would take using whatever useful string manipulation functions you have available in
+your programming language of choice, but here is a regular expression solution to solve the problem, using the Ruby
+programming language:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;#!/usr/bin/env ruby
+
+# Match a single octet component of the address (&#39;0&#39; to &#39;255&#39;)
+octect = /
+# Single digit from 0-9 OR ...
+\d |
+
+# (&#39;0&#39; or &#39;1&#39;) (optional) followed by any two digits from 0-9 OR ...
+[01]?\d\d |
+
+# &#39;2&#39; followed by single character from 0-4 OR ...
+2[0-4]\d |
+
+# &#39;25&#39; followed by any character from 0-5
+25[0-5]
+ /x
+
+# Match a complete IPv4 address (&#39;octect.octect.octet.octet&#39;)
+ipv4 = /
+# Beginning of line followed by ((`octect` followed by period) three times)
+^(#{octect}.){3}
+
+# Single occurence of `octect` followed by end of line
+#{octect}$
+/x
+
+puts &#39;123.255.0.10&#39;.match(ipv4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We could have been negligent and instead written this as the solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;#!/usr/bin/env ruby
+
+octect = /\d|[01]?\d\d|2[0-4]\d|25[0-5]/
+
+puts &#39;123.255.0.10&#39;.match(/^(#{octect}\.){3}#{octect}$/)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or stupendously negligent and written this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;#!/usr/bin/env ruby
+
+puts &#39;123.255.0.10&#39;.match(/^((\d|[01]?\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[01]?\d\d|2[0-4]\d|25[0-5])$/)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But part of the art of writing regular expressions - as with regular programming code - is in the presentation!&lt;/p&gt;
+
+&lt;p&gt;I feel that regular expressions only appear difficult and unwieldy because of prior experience of badly-presented
+or poorly-written regular expressions. As with any code, regular expressions may be composed of manageable pieces that can separately be understood without
+too much difficulty by most people.&lt;/p&gt;
+
+&lt;p&gt;Regular expression composition is not hard to learn if you are capable of learning a programming language - there are not
+many rules to learn in order to become useful with them.&lt;/p&gt;
+
+&lt;p&gt;Build your own personal library of regular expressions, and paste them into your code where needed. Mastery of this
+elegant approach to this type of programming problem is one way to stand out from the crowd.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 29 Aug 2015 00:00:00 +0100</pubDate>
+        <link>https://robinrob.github.io/robinrob.github.io-dev/blog/learn-regex-or-regret-it</link>
+        <guid isPermaLink="true">https://robinrob.github.io/robinrob.github.io-dev/blog/learn-regex-or-regret-it</guid>
+        
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Fast Javascript Variable Debugging</title>
+        <description>&lt;p&gt;Note: when debugging Javascript in the browser, it&amp;#39;s usually best to just use the Chrome dev tools for this!&lt;/p&gt;
+
+&lt;p&gt;Besides using a browser&amp;#39;s dev tools whilst debugging Javascript, you still may find yourself needing to quickly print
+the contents of an object out to the console. You may be writing a short Node script in a text editor for example.
+Printing out the contents of an object involves typing something like the following - for example to display the
+contents of the object referenced by variable &lt;code&gt;myVar&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;console.log(&#39;myVar: &#39; + JSON.stringify(myVar, null, &#39;\t&#39;))&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a pretty unwieldy line and when debugging an unfamiliar piece of code you could waste a lot of time typing or even
+copy-pasting this and subsequently modifying it.&lt;/p&gt;
+
+&lt;p&gt;Since I use the command-line and my ZSH environment as a swiss-army knife in all that I do, I
+wrote a quick little shell function to do the work of constructing the above useful snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;zsh&quot;&gt;function console_log_json () {
+    local +r Variable=$1
+    
+    copy_print &quot;console.log(&#39;$Variable: &#39; + JSON.stringify($Variable, null, &#39;\  &#39;))&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where &lt;code&gt;copy_print&lt;/code&gt; is the following shell function (requires &lt;code&gt;pbcopy&lt;/code&gt; and &lt;code&gt;pbpaste&lt;/code&gt; programs):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;zsh&quot;&gt;function copy_print () {
+    # printf is necessary here because print does not print a string containing only
+    # the character &#39;-&#39;, no matter how many times the string contains it.
+    printf $@ | pbcopy &amp;&amp; pbpaste
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The workflow goes like this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;See a variable that you&amp;#39;d really like to check the contents of when you run your app, e.g. &lt;code&gt;myVar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Switch focus to the terminal (I use a hot-key: cmd + caps-lock)&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;console_log_json&lt;/code&gt; (or alias of - i use &lt;code&gt;logj&lt;/code&gt; for example) then name of variable: &lt;code&gt;logj myVar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Switch focus back to the editor and paste the snippet which should be in the clipboard: &lt;code&gt;console.log(&amp;#39;myvar: &amp;#39; + JSON.stringify(myvar, null, &amp;#39;\t&amp;#39;))&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is pretty snappy when you need it! And can be made arbitrarily complex or &amp;#39;pretty&amp;#39; of course.&lt;/p&gt;
+
+&lt;p&gt;The point of this post is to demonstrate the fun of automating out repetetive actions that you may find yourself making,
+and the usefulness of the command-line plus shell environment in this.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Aug 2015 00:00:00 +0100</pubDate>
+        <link>https://robinrob.github.io/robinrob.github.io-dev/blog/console-log-json-stringify</link>
+        <guid isPermaLink="true">https://robinrob.github.io/robinrob.github.io-dev/blog/console-log-json-stringify</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>ConsoleWriter jQuery Plugin</title>
+        <description>&lt;h2 class=&quot;console-writer&quot; cw-sound=&quot;true&quot; cw-animation=&quot;true&quot;&gt;Edit Me!&lt;/h2&gt;
+
+&lt;p&gt;I wanted to create a console-like typing effect on a heading element, with the heading firstly 
+appearing character by character as if being typed in at a developer&amp;#39;s console. This sort of thing has already been done
+as in &lt;a href=&quot;http://www.mattboldt.com/demos/typed-js/&quot;&gt;Typed.js&lt;/a&gt;,
+&lt;a href=&quot;http://codepen.io/voronianski/pen/aicwk&quot;&gt;typeWriter.js&lt;/a&gt; or
+&lt;a href=&quot;https://github.com/fardjad/realistic-typewriter.js&quot;&gt;realistic-typewriter.js&lt;/a&gt;. As with most ideas in the JS
+world or software world, it is fair to say that this idea has been done before.&lt;/p&gt;
+
+&lt;p&gt;My main motivation for the project was to gain familiarity with using jQuery and I believe that embarking on a pet
+project is the best, most fun and most productive way to learn a new programming language or framework. &lt;/p&gt;
+
+&lt;p&gt;The main objective I wanted to achieve was actually to allow the site visitor to modify the heading element by focusing it,
+deleting existing characters and typing whatever they wanted into the element, complete with a blinking cursor at the end
+of the line as in a terminal. I also added keyboard typing sounds to heighten the effect. Try it now by clicking any of
+the headings within this blog article.&lt;/p&gt;
+
+&lt;h2 class=&quot;console-writer&quot; cw-typing-sound=&quot;true&quot;&gt;ConsoleWriter&lt;/h2&gt;
+
+&lt;p&gt;I packaged the project up as a jQuery plugin: &lt;a href=&quot;https://github.com/robinrob/consolewriter.jquery.js&quot;&gt;ConsoleWriter&lt;/a&gt;,
+designed with a focus on user-friendliness and configurability using options. The heading above this paragraph displays the default method of usage which requires
+just adding the &lt;code&gt;console-writer&lt;/code&gt; class to the element. Reload the page again to see the typewriter effect. The &lt;code&gt;readme&lt;/code&gt;
+file included in the repo describes the options and how to set them. There is also a &lt;code&gt;demo.html&lt;/code&gt; file which shows
+example usages.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 01 Jul 2015 00:00:00 +0100</pubDate>
+        <link>https://robinrob.github.io/robinrob.github.io-dev/blog/console-writer-jquery-plugin</link>
+        <guid isPermaLink="true">https://robinrob.github.io/robinrob.github.io-dev/blog/console-writer-jquery-plugin</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Jekyll Gulp HAML SASS BrowserSync</title>
+        <description>&lt;p&gt;Whilst using Github&amp;#39;s Jekyll framework to build a static website, I noticed a lack of built-in HAML support. I am a big fan of using HAML to produce HTML. Apart from this lack of support for HAML, I enjoy using Jekyll.&lt;/p&gt;
+
+&lt;p&gt;Since I was using Gulp to manage the build process, I needed a Gulp task to handle the HAML preprocessing. I initially tried using the &lt;a href=&quot;https://www.npmjs.com/package/gulp-haml&quot;&gt;gulp-haml&lt;/a&gt; module in my HAML task, but it produced incorrect results a few times. I came across the node module &lt;a href=&quot;https://github.com/moneypenny/gulp-ruby-haml&quot;&gt;gulp-ruby-haml&lt;/a&gt;, which is a wrapper on the Ruby gem &lt;a href=&quot;https://rubygems.org/gems/haml&quot;&gt;haml&lt;/a&gt;, and which gives accurate results.&lt;/p&gt;
+
+&lt;h2 class=&quot;section-heading&quot;&gt;HAML Processing&lt;/h2&gt;
+
+&lt;p&gt;HAML files reside inside a &lt;code&gt;_haml&lt;/code&gt; folder which sits at the location of the resultant HTML files. For example:
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;project-root
+        index
+                _haml
+                        index.haml
+                index.html
+        _includes
+                _haml
+                        footer.haml
+                        head.haml
+                        nav.haml
+                footer.html
+                head.html
+                nav.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+
+&lt;p&gt;The HAML build task is actually fairly slow compared to the CSS or Javascript processing tasks. It can take up to 10 seconds to process all of the HAML in the project. This is unacceptable when rebuilding on-the-fly while making changes.&lt;/p&gt;
+
+&lt;p&gt;To avoid slow build times, I use a separate &lt;code&gt;haml-watch&lt;/code&gt; task that watches the HAML files for changes, then only processes the files that changed. The stream is then piped into the code for compiling the HAML, which is contained in the function &lt;code&gt;hamlBuild()&lt;/code&gt;. This stream-piping step makes use of &lt;a href=&quot;https://www.npmjs.com/package/stream-combiner2&quot;&gt;stream-combiner2&lt;/a&gt;. Below is the code for both HAML tasks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;var haml = require(&#39;gulp-ruby-haml&#39;)
+var combiner = require(&#39;stream-combiner2&#39;)
+
+...
+
+var config = {
+    paths: {
+        ...
+        haml: {
+            src: [&#39;**/_haml/*.haml&#39;]
+        },
+        ...
+    }
+}
+
+...
+
+/* hamlBuild() contains the shared build logic used by haml-watch and haml-build */
+function hamlBuild() {
+    return combiner(
+        haml(),
+        rename(function (path) {
+            path.dirname += &#39;/../&#39;
+        })
+    )
+}
+
+/* Watch and compile only changed HAML files to HTML.
+ * haml-watch has its own task to avoid doing a full HAML build on each .haml file change, since a full HAML build
+ * can be quite slow.
+ */
+gulp.task(&#39;haml-watch&#39;, function () {
+    gulp.src(config.paths.haml.src, {read: false})
+        .pipe(watch(config.paths.haml.src))
+        .pipe(hamlBuild())
+        .pipe(gulp.dest(&#39;./&#39;))
+})
+
+/* Compile all HAML files to HTML. */
+gulp.task(&#39;haml-build&#39;, function () {
+    return gulp.src(config.paths.haml.src)
+        .pipe(hamlBuild())
+        .pipe(gulp.dest(&#39;./&#39;))
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 class=&quot;section-heading&quot;&gt;Full Site Template&lt;/h2&gt;
+
+&lt;p&gt;Whilst researching Jekyll, I noticed a few other people sharing their Jekyll setups as site templates. Here is my own &lt;a href=&quot;https://github.com/robinrob/jekyll-gulp-haml-sass-browsersync.git&quot;&gt;jekyll-gulp-haml-sass-browsersync&lt;/a&gt; template which includes my full &lt;a href=&quot;https://github.com/robinrob/jekyll-gulp-haml-sass-browsersync/blob/master/gulpfile.js&quot;&gt;Gulpfile&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 04 Jun 2015 00:00:00 +0100</pubDate>
+        <link>https://robinrob.github.io/robinrob.github.io-dev/blog/jekyll-gulp-haml-sass-browsersync</link>
+        <guid isPermaLink="true">https://robinrob.github.io/robinrob.github.io-dev/blog/jekyll-gulp-haml-sass-browsersync</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>RSS Reader Script</title>
+        <description>&lt;p&gt;I wanted a quick, lightweight way to browse and open articles from RSS feeds from within the terminal. I wrote a short
+&lt;a href=&quot;git@github.com:robinrob/rss-opener.git&quot;&gt;Ruby script&lt;/a&gt; for quickly opening RSS feed articles in a web browser.&lt;/p&gt;
+
+&lt;h2&gt;Screenshot&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/rss-opener.png&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Further details on its usage are given in the README file in the project.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 24 May 2015 00:00:00 +0100</pubDate>
+        <link>https://robinrob.github.io/robinrob.github.io-dev/blog/rss-feed-reader</link>
+        <guid isPermaLink="true">https://robinrob.github.io/robinrob.github.io-dev/blog/rss-feed-reader</guid>
+        
+        
+      </item>
+    
   </channel>
 </rss>
